@@ -23,6 +23,8 @@ function setup() {
 
   // Options for map
   const options = {
+    // all parameters here: https://docs.mapbox.com/mapbox-gl-js/api/map/
+    // Then Mapbox GL JS initializes the map on the page and returns your Map object.
     lat: startlatitude,
     lng: startlongitude,
     zoom: 10,
@@ -64,7 +66,7 @@ function drawHurricaneDots() {
       const latlong = myMap.latLngToPixel(latitude, longitude);
       
       // append pixel positions to an array pos
-      append(pos, latlong)
+      //append(pos, latlong)
       
        ellipse(latlong.x, latlong.y, 50, 50);
       //rect((latlong.x), (latlong.y), (latlong.x + 5), (latlong.y + 5),)
@@ -77,6 +79,6 @@ function drawHurricaneDots() {
       // }
   }
 
-   print(pos)    
+   //print(pos)    
 
 }
