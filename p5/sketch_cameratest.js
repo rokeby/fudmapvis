@@ -14,7 +14,9 @@ function preload() {
 }
 
 function setup() {
-  canvas = createCanvas(1200, 700);
+  var canvas = createCanvas(windowWidth / 2, windowHeight);
+  canvas.style('display', 'block')
+  canvas.parent('mapvis');
 
   // establish lat and long for map options (starting position)
   const startlatitude = Number(hurricanes.getString(1, 'lat'));
@@ -166,4 +168,8 @@ function drawGradient(x, y) {
       ellipse(x, y, r, r);
     }
   }
+}
+
+function windowResized() {
+  resizeCanvas(windowWidth, windowHeight);
 }

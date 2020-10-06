@@ -14,12 +14,12 @@ function preload() {
 }
 
 function setup() {
-  canvas = createCanvas(1200, 700);
+  canvas = createCanvas(windowWidth, windowHeight);
 
   // establish lat and long for map options (starting position)
-  const startlatitude = Number(hurricanes.getString(1, 'lat'));
-  const startlongitude = Number(hurricanes.getString(1, 'long'));
-  print("first hurricane point is " + startlatitude, + ", " + startlongitude)
+  // const startlatitude = Number(hurricanes.getString(1, 'lat'));
+  // const startlongitude = Number(hurricanes.getString(1, 'long'));
+  // print("first hurricane point is " + startlatitude, + ", " + startlongitude)
 
   // Options for map
   const options = {
@@ -45,7 +45,7 @@ function setup() {
   fill('rgba(255,0,0, 0.5)');
   stroke(10);
 
-  print(hurricanes.getRowCount() + " total rows in table");
+  // print(hurricanes.getRowCount() + " total rows in csv table");
 }
 
 // The draw loop is fully functional but we are not using it for now.
@@ -78,7 +78,5 @@ function drawHurricaneDots() {
       //     smooth()
       // }
   }
-
-   //print(pos)    
 
 }
