@@ -34,7 +34,7 @@ function setup() {
     bearing: -30,
     //style: 'mapbox.dark' //streets, outdoors, light, dark, satellite (for nonstudio)
     // style: 'mapbox://styles/mapbox/satellite-v9',
-    interactive: false,
+    dragPan: false,
   };
 
   // Create a tile map and overlay the canvas on top.
@@ -51,6 +51,7 @@ function setup() {
   ellipseMode(RADIUS);
 
   print(hurricanes.getRowCount() + " total rows in table");
+
 }
 
 function initiateHurricane () {
@@ -60,26 +61,26 @@ function initiateHurricane () {
   // from GL JS's use in the added source. You can use any request method (library
   // or otherwise) that you want.
 
-    d3.csv("../data/katrina_latLng_cleaned.csv",
-      function (err, data) {
-        if (err) throw err;
-        //console.log(data)
+    // d3.csv("../data/katrina_latLng_cleaned.csv",
+    //   function (err, data) {
+    //     if (err) throw err;
+    //     //console.log(data)
         
-        let pos = []
+    //     let pos = []
 
-        for (let i = 0; i < hurricanes.getRowCount(); i += 1) {
-          // Get the lat/lng of each meteorite
-          const latitude = Number(hurricanes.getString(i, 'lat'));
-          const longitude = Number(hurricanes.getString(i, 'long'));
+    //     for (let i = 0; i < hurricanes.getRowCount(); i += 1) {
+    //       // Get the lat/lng of each meteorite
+    //       const latitude = Number(hurricanes.getString(i, 'lat'));
+    //       const longitude = Number(hurricanes.getString(i, 'long'));
 
-          // Transform lat/lng to pixel position
-          const latlong = myMap.latLngToPixel(latitude, longitude);
+    //       // Transform lat/lng to pixel position
+    //       const latlong = myMap.latLngToPixel(latitude, longitude);
           
-          // append pixel positions to an array pos
-          append(pos, latlong)
+    //       // append pixel positions to an array pos
+    //       append(pos, latlong)
               
-          }
-        })
+    //       }
+    //     })
 
     d3.json(
       'https://docs.mapbox.com/mapbox-gl-js/assets/hike.geojson',
@@ -108,6 +109,7 @@ function initiateHurricane () {
         // setup the viewport
         myMap.map.jumpTo({ 'center': coordinates[0], 'zoom': 15.5 });
         myMap.map.setPitch(30);
+        myMap.map.dragPan.disable();
          
         // on a regular basis, add more coordinates from the saved list and update the map
         var i = 0;
