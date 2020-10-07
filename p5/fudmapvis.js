@@ -7,6 +7,7 @@ let myMap;
 let canvas;
 let hurricanes;
 const geoJSONlatlong = []
+const zoom = 10
 
 function preload() {
 	// Load the csv data
@@ -29,11 +30,12 @@ function setup() {
     // Then Mapbox GL JS initializes the map on the page and returns your Map object.
     lat: startlatitude,
     lng: startlongitude,
-    zoom: 15.5,
+    zoom: zoom,
     studio: true, // false to use non studio styles
     style: 'mapbox://styles/rokeby/ckfvgjjsy6vkw19mkij8g9v3c',
+    // style: 'mapbox://styles/rokeby/ckfzdwcyi058w19s0w40c1i25',
     pitch: 45,
-    bearing: -30,
+    bearing: 0,
     //style: 'mapbox.dark' //streets, outdoors, light, dark, satellite (for nonstudio)
     // style: 'mapbox://styles/mapbox/satellite-v9',
     dragPan: false,
@@ -46,19 +48,19 @@ function setup() {
   // you can pass a callback that will execute when the map is loaded and the p5 canvas is ready.
   myMap.overlay(canvas, initiateHurricane);
 
-  // fill('rgba(255,0,0, 0.1)');                
   noStroke();
   colorMode(HSB, 360, 100, 100, 1)
-  dim = 300;
+  dim = 100;
   ellipseMode(RADIUS);
 
-  print(hurricanes.getRowCount() + " total rows in table");
+  // print(hurricanes.getRowCount() + " total rows in table");
 
 }
 
 function initiateHurricane () {
 
   myMap.map.on('load', function () {
+
   // We use D3 to fetch the JSON here so that we can parse and use it separately
   // from GL JS's use in the added source. You can use any request method (library
   // or otherwise) that you want.
@@ -85,7 +87,7 @@ function initiateHurricane () {
     //     })
 
     d3.json(
-      'https://docs.mapbox.com/mapbox-gl-js/assets/hike.geojson',
+      '../data/hike.geojson',
       function (err, data) {
         if (err) throw err;
      
@@ -109,49 +111,50 @@ function initiateHurricane () {
         });
 
         // setup the viewport
-        myMap.map.jumpTo({ 'center': coordinates[0], 'zoom': 15.5 });
+        myMap.map.jumpTo({ 'center': coordinates[0], 'zoom': zoom });
         myMap.map.setPitch(30);
-        myMap.map.dragPan.disable();
+        // myMap.map.dragPan.disable();
+        // myMap.map.scrollZoom.disable();
          
         // on a regular basis, add more coordinates from the saved list and update the map
         var i = 0;
-        var timer = window.setInterval(function () {
-          if (i < coordinates.length) {
-            data.features[0].geometry.coordinates.push(
-            coordinates[i]
-            );
-            myMap.map.getSource('trace').setData(data);
-            myMap.map.panTo(coordinates[i]);
+        // var timer = window.setInterval(function () {
+        //   drawCircle();
+        //   if (i < coordinates.length) {
+        //     data.features[0].geometry.coordinates.push(
+        //     coordinates[i]
+        //     );
+        //     myMap.map.getSource('trace').setData(data);
+        //     myMap.map.panTo(coordinates[i]);
             
-            // append(geoJSONlatlong, pixellatlong)
-            // print(geoJSONlatlong.length)
-            const latitude = coordinates[i][0]
-            const longitude = coordinates[i][1]
-            append(geoJSONlatlong, coordinates[i])
-            // print(geoJSONlatlong.length)
+        //     // append(geoJSONlatlong, pixellatlong)
+        //     // print(geoJSONlatlong.length)
+        //     const latitude = coordinates[i][0]
+        //     const longitude = coordinates[i][1]
+        //     append(geoJSONlatlong, coordinates[i])
+        //     print(geoJSONlatlong.length)
 
-            //const pixellatlong = myMap.latLngToPixel(coordinates[i][1], coordinates[i][0])
-            // it is necessary to re-calculate the latLngToPixel every step!
-            clear()
-            var n = 10 // visual thing at every 50th point
+        //     //const pixellatlong = myMap.latLngToPixel(coordinates[i][1], coordinates[i][0])
+        //     // it is necessary to re-calculate the latLngToPixel every step!
+        //     clear()
+        //     var n = 10 // visual thing at every 50th point
 
-            for (let i = 0; i < geoJSONlatlong.length; i += 1) {
-              if( i % n == 0) {
-                const lat = Number(coordinates[i][0])
-                const long = Number(coordinates[i][1])
-                const latlong = myMap.latLngToPixel(long, lat)
-                drawGradient(latlong.x, latlong.y)
-              }
-            }
+        //     for (let i = 0; i < geoJSONlatlong.length; i += 1) {
+              
+        //       // drawCircle();
 
-            // why does this ellipse spawn at fixed location, not moving with map?
-            // because it is being calculated once, not on change!
-
-            i++;
-          } else {
-            window.clearInterval(timer);
-          }
-        }, 10);        
+        //       if( i % n == 0) {
+        //         const lat = Number(coordinates[i][0])
+        //         const long = Number(coordinates[i][1])
+        //         const latlong = myMap.latLngToPixel(long, lat)
+        //         drawGradient(latlong.x, latlong.y)
+        //       }    
+        //     }
+        //     i++;
+        //   } else {
+        //     window.clearInterval(timer);
+        //   }
+        // }, 1000);        
       }
     );
   });
@@ -159,15 +162,23 @@ function initiateHurricane () {
 
 function drawGradient(x, y) {
   let radius = dim / 2;
-  n = 5;
+  n = 7;
   for (let r = radius; r > 0; --r) { 
     if( r % n == 0) {
       // from radius downwards, draw a circle and increase hue each time
       // you want to decrease alpha instead :)
-      fill (0, 90, 90, 0.005)
-      ellipse(x, y, r, r);
+      noStroke()
+      fill (0, 0, 100, 0.01)
+      ellipse(x, y, r, r/2);
     }
   }
+}
+
+function drawCircle() {
+    noFill() 
+    ellipse(windowWidth / 4, windowHeight / 2, windowHeight / 6, windowHeight / 6)
+    stroke(120, 90, 90, 1)
+    strokeWeight(2)  
 }
 
 function windowResized() {

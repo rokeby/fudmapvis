@@ -1,6 +1,7 @@
 body {
   padding: 0;
   margin: 0;
+  background-color: black;
 }
 
 a.mapboxgl-ctrl-logo {
@@ -13,11 +14,9 @@ a.mapboxgl-ctrl-logo {
 }
 
 .left {
-	width: 50vw;
 }
 
 .right {
-	max-width: 50vw;
 }
 
 #mapvis {
@@ -31,10 +30,10 @@ a.mapboxgl-ctrl-logo {
 
 #market {
 	display: block;
-	width: 50vw;
-}
+/*	width: 50vw;
+*/}
 
 #chat {
 	display: block;
-	width: 50vw;
-}
+/*	width: 50vw;
+*/}
