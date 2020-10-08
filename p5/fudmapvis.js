@@ -15,7 +15,7 @@ function preload() {
 }
 
 function setup() {
-  var canvas = createCanvas(windowWidth / 2, windowHeight);
+  var canvas = createCanvas(windowWidth, windowHeight);
   canvas.style('display', 'block')
   canvas.parent('mapvis');
 
@@ -34,7 +34,7 @@ function setup() {
     studio: true, // false to use non studio styles
     style: 'mapbox://styles/rokeby/ckfvgjjsy6vkw19mkij8g9v3c',
     // style: 'mapbox://styles/rokeby/ckfzdwcyi058w19s0w40c1i25',
-    pitch: 45,
+    pitch: 50,
     bearing: 0,
     //style: 'mapbox.dark' //streets, outdoors, light, dark, satellite (for nonstudio)
     // style: 'mapbox://styles/mapbox/satellite-v9',
@@ -112,7 +112,7 @@ function initiateHurricane () {
 
         // setup the viewport
         myMap.map.jumpTo({ 'center': coordinates[0], 'zoom': zoom });
-        myMap.map.setPitch(30);
+        myMap.map.setPitch(50);
         // myMap.map.dragPan.disable();
         // myMap.map.scrollZoom.disable();
          
