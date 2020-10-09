@@ -7,7 +7,7 @@ let myMap;
 let canvas;
 let hurricanes;
 const geoJSONlatlong = []
-const zoom = 10
+const zoom = 14
 
 function preload() {
 	// Load the csv data
@@ -50,7 +50,7 @@ function setup() {
 
   noStroke();
   colorMode(HSB, 360, 100, 100, 1)
-  dim = 100;
+  dim = 200;
   ellipseMode(RADIUS);
 
   // print(hurricanes.getRowCount() + " total rows in table");
@@ -154,7 +154,7 @@ function initiateHurricane () {
         //   } else {
         //     window.clearInterval(timer);
         //   }
-        // }, 1000);        
+        // }, 10);
       }
     );
   });
@@ -168,8 +168,8 @@ function drawGradient(x, y) {
       // from radius downwards, draw a circle and increase hue each time
       // you want to decrease alpha instead :)
       noStroke()
-      fill (0, 0, 100, 0.01)
-      ellipse(x, y, r, r/2);
+      fill (130, 100, 43, 0.02)
+      ellipse(x, y, r*2, r*2);
     }
   }
 }
