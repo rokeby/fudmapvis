@@ -2,11 +2,27 @@ async function getChat () {
 
 	const response = await fetch('http://server.fud.global:8888/chat')
 	const chat = await response.json();
-	console.log('chat is', chat)
-
+	$("#chat").html('')
 	chat.forEach(msg => $("#chat").append(msg.agent + ': ' + msg.chat + '<br>')
 		.css({'font-color': msg.agent }))
 }
 
-$("#chat").css({'border' : 'white 1px solid'})
-getChat();
+//handle post requests
+$('#userChat').submit(function(event) {
+	event.preventDefault();
+	$.ajax({
+		url: 'http://server.fud.global/userchat',
+		type: 'POST',
+		data: $(this).serialize(),
+		success: function(data) {
+			console.log(data)
+		}
+	});
+});
+
+//set chat to run every 10s
+window.setInterval(function(){
+	getChat();
+}, 1000)
+
+

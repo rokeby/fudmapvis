@@ -36,9 +36,17 @@ a.mapboxgl-ctrl-logo {
 #chat {
 	position: fixed;
 	left: 50px;
-	bottom: 50px;
+	bottom: 120px;
 	display: block;
 	z-index: 1;
 	color: green;
-/*	width: 50vw;
-*/}
+}
+
+
+#form {
+	position: fixed;
+	left: 50px;
+	bottom: 20px;
+	display: block;
+	z-index: 1;
+}
