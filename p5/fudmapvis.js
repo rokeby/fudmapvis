@@ -5,11 +5,12 @@ let myMap;
 let canvas;
 let hurricanes;
 const geoJSONlatlong = []
-const zoom = 4
+const zoom = 6
 let preJSON
 let a = []
 let array = []
-
+let latlong = []
+let dim = 100
 function preload() {
 
   preJSON = loadJSON('http://server.fud.global/hurricane');
@@ -50,60 +51,83 @@ function setup() {
   // you can pass a callback that will execute when the map is loaded and the p5 canvas is ready.
   myMap.overlay(canvas, initiateHurricane);
 
-  let dim = 20;
+}
+
+
+async function drawMap() {
+
+  const response = await fetch('http://server.fud.global/hurricane')
+  const data = await response.json();
+
+  let coordinates = []
+
+  for (var i = 0; i < data.length; i++) {
+    coordinates.push(data[i].geometry.coordinates)
+  }
+  console.log("list of coords is", coordinates)
+
+  var latestCoordinate = data[data.length - 1].geometry.coordinates
+  var previousCoordinate = data[data.length - 2].geometry.coordinates
+
+  let points = data.length
+
+  // setup the viewport
+  myMap.map.flyTo({ 'center': latestCoordinate, 'speed' : '1' });
+  myMap.map.setPitch(50);
+  console.log( "now centering to", latestCoordinate);
+
+  // myMap.map.getSource('trace').setData(data);
+  myMap.map.setBearing(bearingBetween(previousCoordinate, latestCoordinate));
+  myMap.map.flyTo({ 'center' : latestCoordinate, 'speed' : '1', 'curve' : '1',' essential' : 'true', 'animate' : 'false'});
+
+  for (var i = 0; i < data.length; i++) {
+    const lat = Number(coordinates[i][0])
+    const long = Number(coordinates[i][1])
+    
+    let prevLat = 0
+    let prevLong = 0
+
+    if (i > 0) {
+      prevLat = Number(coordinates[i - 1][0])
+      prevLong = Number(coordinates[i - 1][1])
+    }
+
+    latlong = myMap.latLngToPixel(long, lat)
+    prevLatlong = myMap.latLngToPixel(prevLong, prevLat)
+
+
+    lerpX = lerp(latlong.x, prevLatlong.x, 0.5);
+    lerpY = lerp(latlong.y, prevLatlong.y, 0.5);
+
+    drawLerpDots(lerpX, lerpY)
+    drawDots(latlong.x, latlong.y)
+
+  }
+  console.log("lerp coords are", lerpX, lerpY)
+  console.log("latlong coords are", latlong)
+}
+
+
+function drawLerpDots(x, y) {
+    ellipse(x, y, 5, 5);
+    fill (130, 100, 43, 1)
+  }
+
+function drawDots(x, y) {
+  ellipse(x, y, 10, 10);
+  fill (0, 100, 43, 1)
 
 }
+
 
 function initiateHurricane () {
 
   myMap.map.on('load', function () {
 
     var timer = window.setInterval(function () {
-
-      d3.json(
-        'http://server.fud.global/hurricane',
-        function (err, data) {
-          if (err) throw err;
-
-          var coordinates = []
-
-          // turn current list of coordinates into an array
-
-          // getCoordinates()
-          
-          for (var i = 0; i < data.length; i++) {
-            coordinates.push(data[i].geometry.coordinates)
-          }
-          console.log("list of coords is", coordinates)
-
-          var latestCoordinate = data[data.length - 1].geometry.coordinates
-          var previousCoordinate = data[data.length - 2].geometry.coordinates
-
-          let points = data.length
-          // console.log("length is: " + points)
-
-          // setup the viewport
-          myMap.map.jumpTo({ 'center': data[data.length - 1].geometry.coordinates, 'speed' : '1' });
-          myMap.map.setPitch(50);
-          console.log( "now centering to", data[data.length - 1].geometry.coordinates);
-
-          // myMap.map.getSource('trace').setData(data);
-          myMap.map.setBearing(bearingBetween(previousCoordinate, latestCoordinate));
-          myMap.map.jumpTo({ 'center' : latestCoordinate, 'speed' : '1', 'curve' : '1',' essential' : 'true', 'animate' : 'false'});
-
-          for (var n = 0; n < data.length; n++) {
-            const lat = Number(coordinates[i][0])
-            const long = Number(coordinates[i][1])
-            const latlong = myMap.latLngToPixel(long, lat)
-          }
-
-          console.log(latlong)
-
-          // clear()
-        }
-      );
-
-    }, 1000);
+      drawMap();
+      clear()
+    }, 5000);
 
   });
 }
