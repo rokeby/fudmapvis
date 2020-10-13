@@ -67,27 +67,42 @@ function initiateHurricane () {
 
           var coordinates = []
 
+          // turn current list of coordinates into an array
+
+          // getCoordinates()
+          
+          for (var i = 0; i < data.length; i++) {
+            coordinates.push(data[i].geometry.coordinates)
+          }
+          console.log("list of coords is", coordinates)
+
+          var latestCoordinate = data[data.length - 1].geometry.coordinates
+          var previousCoordinate = data[data.length - 2].geometry.coordinates
+
           let points = data.length
-          console.log("length is: " + points)
+          // console.log("length is: " + points)
 
           // setup the viewport
           myMap.map.jumpTo({ 'center': data[data.length - 1].geometry.coordinates, 'speed' : '1' });
           myMap.map.setPitch(50);
+          console.log( "now centering to", data[data.length - 1].geometry.coordinates);
 
-          console.log( "centering to", data[data.length - 1].geometry.coordinates);
-           
-          // on a regular basis, add more coordinates from the saved list and update the map
+          // myMap.map.getSource('trace').setData(data);
+          myMap.map.setBearing(bearingBetween(previousCoordinate, latestCoordinate));
+          myMap.map.jumpTo({ 'center' : latestCoordinate, 'speed' : '1', 'curve' : '1',' essential' : 'true', 'animate' : 'false'});
 
+          for (var n = 0; n < data.length; n++) {
+            const lat = Number(coordinates[i][0])
+            const long = Number(coordinates[i][1])
+            const latlong = myMap.latLngToPixel(long, lat)
+          }
 
-              // myMap.map.getSource('trace').setData(data);
-              myMap.map.setBearing(bearingBetween(data[data.length - 2].geometry.coordinates, data[data.length - 1].geometry.coordinates));
-              myMap.map.jumpTo({ 'center' : data[data.length - 1].geometry.coordinates, 'speed' : '1', 'curve' : '1',' essential' : 'true', 'animate' : 'false'});
+          console.log(latlong)
 
-              // it is necessary to re-calculate the latLngToPixel every step!
-              clear()
-            
+          // clear()
         }
       );
+
     }, 1000);
 
   });
