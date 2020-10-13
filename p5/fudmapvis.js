@@ -5,8 +5,10 @@ let myMap;
 let canvas;
 let hurricanes;
 const geoJSONlatlong = []
-const zoom = 7
+const zoom = 4
 let preJSON
+let a = []
+let array = []
 
 function preload() {
 
@@ -20,18 +22,26 @@ function setup() {
   canvas.style('display', 'block');
   canvas.parent('mapvis');
 
-  console.log("prejson is", preJSON)
-  console.log("initial coords", preJSON[0].geometry.coordinates)
-  console.log("prejson length", preJSON.length)
+  for (var key in preJSON) {
+     if (Array.isArray(preJSON) === false) {
+        a.push(preJSON[key]);
+     } else {
+        console.log("already an array");
+     }
+  }
+
+  console.log("a is", a)
+  console.log("initial coords", a[a.length - 1].geometry.coordinates)
+  console.log("a length", a.length)
 
   const options = {
-    lat: preJSON[0].geometry.coordinates[1],
-    lng: preJSON[0].geometry.coordinates[0],
+    lat: a[a.length - 1].geometry.coordinates[1],
+    lng: a[a.length - 1].geometry.coordinates[0],
     zoom: zoom,
     studio: true, // false to use non studio styles
     style: 'mapbox://styles/rokeby/ckfvgjjsy6vkw19mkij8g9v3c',
     pitch: 50,
-    bearing: 0,
+    bearing: bearingBetween(a[a.length - 2].geometry.coordinates, a[a.length - 1].geometry.coordinates),
   };
 
   myMap = mappa.tileMap(options);
