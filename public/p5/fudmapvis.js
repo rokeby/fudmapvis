@@ -5,13 +5,13 @@ let myMap;
 let canvas;
 let hurricanes;
 const geoJSONlatlong = []
-const zoom = 8
+const zoom = 6
 let preJSON
 let array = []
 let latlong = []
 let dim = 100
 let stage = 1
-let pitch = 50
+let pitch = 60
 
 //things below this line we are using
 const interpNum = 50;
@@ -117,15 +117,6 @@ function bearingBetween(coordinate1, coordinate2) {
   return turf.bearing(point1, point2);
 }
 
-// function updateHurricane () {
-// // runs the draw map function at long intervals. this updates data.
-//   myMap.map.on('load', function () {
-//     var timer = window.setInterval(function () {
-//       drawMap();
-//     }, 5000);
-//   });
-// }
-
 function drawCanvas(startPoint, endPoint) {
 
   geojsonPoint.features[0].geometry.coordinates = [];
@@ -189,7 +180,7 @@ function drawMap() {
     var previousCoordinate = currentData[currentData.length - 2].geometry.coordinates
   }
 
-  myMap.map.jumpTo({ 'center': latestCoordinate, 'speed' : '1' });
+  myMap.map.jumpTo({ 'center': latestCoordinate });
   myMap.map.setPitch(pitch);
   // console.log( "centering on", latestCoordinate, "in an array of", coordinates.length, ", the last point was", previousCoordinate);
 
@@ -202,49 +193,7 @@ function drawMap() {
   } 
   myMap.map.jumpTo({ 'center' : latestCoordinate, 'speed' : '1', 'curve' : '1',' essential' : 'true'});
 
-  // console.log(coordinates)
-
-  // mapBounds = myMap.map.getBounds();
-  // mylnglat = [40.6, -61.1]
-
-  // console.log(mapBounds._ne.lng, mapBounds._ne.lat, inBounds(mapBounds, mylnglat));
-
-  // pointNE = [bounds._ne.lat, bounds._ne.lng]
-  // pointSW = [bounds._sw.lat, bounds._sw.lng]
-
-  // var line = turf.lineString([pointNE, pointSW])
-  // var bboxBound = turf.bbox(line)
-  // var polygonBound = turf.bboxPolygon(bboxBound)
-  // var polygonBoundPoints = turf.polygon([polygonBound.geometry.coordinates[0]])
-
-  // console.log(coordinates[coordinates.length-1])
-  // console.log(polygonBoundPoints)
-  // console.log(polygonBound)
-  // console.log(turf.booleanPointInPolygon(turf.point([40.6, -61.1]), polygonBoundPoints))
-  // console.log(turf.booleanPointInPolygon(turf.point(coordinates[0]), polygonBoundPoints))
-  // console.log(polygonBound.geometry.coordinates[0])
-
-  // for (let k = 1; k < polygonBound.geometry.coordinates[0].length - 1; k ++) {
-  //     const pointLat = polygonBound.geometry.coordinates[0][k][0]
-  //     const pointLong = polygonBound.geometry.coordinates[0][k][1]
-  //     const prevPointLat = polygonBound.geometry.coordinates[0][k-1][1]
-  //     const prevPointLong = polygonBound.geometry.coordinates[0][k-1][1]
-
-  //     const pointLatLong = myMap.latLngToPixel(pointLong, pointLat)
-  //     const prevPointLatLong = myMap.latLngToPixel(prevPointLong, prevPointLat)
-  //     drawLine(pointLatLong.x, pointLatLong.y, prevPointLatLong.x, prevPointLatLong.y)
-
-  //   }
-
-  let pointsToDraw = []
-
   for (let i = 1; i < (coordinates.length - 1); i += 1) {
-
-    // if (turf.booleanPointInPolygon(turf.point(coordinates[i]), polygonBound) === true ) {
-    //   pointsToDraw.push(coordinates[i])
-    //   console.log("it's true!")
-    //   // console.log(pointsToDraw)
-    // }
 
       const pointLat = coordinates[i][0]
       const pointLong = coordinates[i][1]
@@ -253,35 +202,13 @@ function drawMap() {
       const pointLatLong = myMap.latLngToPixel(pointLong, pointLat)
       const prevPointLatLong = myMap.latLngToPixel(prevPointLong, prevPointLat)
 
-      if (pointLatLong.x < 2000 && pointLatLong.y > -2000 && prevPointLatLong.x < 2000 && prevPointLatLong.y > -2000) {
-            drawLine(pointLatLong.x, pointLatLong.y, prevPointLatLong.x, prevPointLatLong.y)
-      } else {
-        console.log( "this line is too long!" )
-      }
-
-      // console.log(pointLatLong.x, pointLatLong.y, prevPointLatLong.x, prevPointLatLong.y)
-      // console.log(pointLat, pointLong)
+      drawLine(pointLatLong.x, pointLatLong.y, prevPointLatLong.x, prevPointLatLong.y)
   }
 
   if(coordinates.length > 2) {
     drawCanvas(previousCoordinate, latestCoordinate)
   }
 }
-
-
-// const inBounds = function (bounds, lnglat) {
-//     let lng;
-
-//     const multLng = (lnglat[0] - bounds['_ne']['lng']) * (lnglat[0] - bounds['_sw']['lng']);
-//     if (bounds['_ne']['lng'] > bounds['_sw']['lng']) {
-//         lng = multLng < 0;
-//     } else {
-//         lng = multLng > 0;
-//     }
-
-//     const lat = (lnglat[1] - bounds['_ne']['lat']) * (lnglat[1] - bounds['_sw']['lat']) < 0;
-//     return lng && lat;
-// };
 
 function newHurricane() {
   console.log('time for a new hurricane')
@@ -309,7 +236,7 @@ async function listenForNewPoints() {
 
 window.setInterval( function() {
   listenForNewPoints()     
-}, 500)
+}, 500) // drawMap runs at this interval atm.
   
 
 
