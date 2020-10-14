@@ -310,6 +310,7 @@ window.setInterval( function() {
   listenForNewPoints()     
 }, 200) // drawMap runs at this interval atm.
   
+$(".mapboxgl-ctrl-bottom-right").css({'display' : 'none'})
 
 
 
