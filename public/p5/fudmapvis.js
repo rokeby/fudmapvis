@@ -14,7 +14,7 @@ let stage = 1
 let pitch = 60
 
 //things below this line we are using
-const interpNum = 50;
+const interpNum = 20;
 let interpCount = 1
 
 let currentData = {}
@@ -25,7 +25,6 @@ let geojsonPoint = {
       "geometry": {
           "type": "LineString",
           "coordinates": [
-      
           ]
       }
   }]
@@ -70,6 +69,9 @@ function setup() {
     style: 'mapbox://styles/rokeby/ckfvgjjsy6vkw19mkij8g9v3c',
     pitch: pitch,
     bearing: bearing,
+    worldCopyJump: false,
+    noWrap: true,
+    maxBounds: [ [-180, -85], [180, 85] ],
   }
 
   myMap = mappa.tileMap(options);
@@ -83,21 +85,43 @@ function windowResized() {
   resizeCanvas(windowWidth, windowHeight);
 }
 
-function drawLine(x1, x2,y1,y2) {
-  line(x1, x2,y1,y2)
-  stroke("#00FF00")
+function drawLine(x1, x2, y1, y2) {
+  line(x1, x2,y1,y2);
+  colorMode(HSB, 100);  
+  stroke(120, 100, 100);
 }
 
 function drawBlueLine(x1, x2,y1,y2) {
-  line(x1, x2,y1,y2)
-  stroke("#0000FF")
+  line(x1, x2,y1,y2);
+  colorMode(RGB, 100);  
+  stroke("#00FF00");
 }
 
-function drawDots(x, y) {
-  ellipse(x, y, 10, 10);
-  fill (0, 100, 43, 1)
+function drawYellowLine(x1, x2,y1,y2) {
+  colorMode(HSB, 100);  
+  stroke(60, 100, 100);
+  line(x1,x2,y1,y2);
 }
 
+function drawDots(iterator, x, y) {
+  ellipse(x, y, iterator*15, iterator*15);
+  fill (0, 100, 43, 1);
+  stroke("#00FF00");
+}
+
+function detectZoom() {
+  
+  let lastZoom = myMap.map.getZoom();
+  myMap.map.on('zoom', () => {
+    const currentZoom = myMap.map.getZoom();
+    if (currentZoom > lastZoom) {
+      // print("we zoomed in! zoom:", currentZoom)
+    } else {
+      // print("we zoomed out! zoom:", currentZoom)
+    }
+    lastZoom = currentZoom;
+  });
+}
 
 function bearingBetween(coordinate1, coordinate2) {
   var point1 = {
@@ -115,6 +139,17 @@ function bearingBetween(coordinate1, coordinate2) {
     }
   };
   return turf.bearing(point1, point2);
+}
+
+function updateBearing(coordinates, previousCoordinate, latestCoordinate) {
+    if(coordinates.length > 2) {
+      myMap.map.setBearing(bearingBetween(previousCoordinate, latestCoordinate));
+      // console.log(bearingBetween(previousCoordinate, latestCoordinate));
+      // console.log(coordinates.length, previousCoordinate, latestCoordinate)
+    } else {
+      myMap.map.setBearing(0);
+      // console.log(coordinates.length, previousCoordinate, latestCoordinate)
+    } 
 }
 
 function drawCanvas(startPoint, endPoint) {
@@ -143,24 +178,25 @@ function drawCanvas(startPoint, endPoint) {
      
       if (interpCount < rectCollection.features.length) {
 
-          for(let j = 1; j < interpCount; j++) {
+        for(let j = 1; j < interpCount; j++) {
 
-          var lat = rectCollection.features[j].geometry.coordinates[0]
-          var long = rectCollection.features[j].geometry.coordinates[1]
-          var prevlat = rectCollection.features[j-1].geometry.coordinates[0]
-          var prevlong = rectCollection.features[j-1].geometry.coordinates[1]
+        var lat = rectCollection.features[j].geometry.coordinates[0] 
+        var long = rectCollection.features[j].geometry.coordinates[1]
+        var prevlat = rectCollection.features[j-1].geometry.coordinates[0]
+        var prevlong = rectCollection.features[j-1].geometry.coordinates[1]
 
-          const latlong = myMap.latLngToPixel(long, lat)
-          const prevlatlong = myMap.latLngToPixel(prevlong, prevlat)
+        const latlong = myMap.latLngToPixel(long, lat)
+        const prevlatlong = myMap.latLngToPixel(prevlong, prevlat)
 
-          x1 = latlong.x
-          x2 = prevlatlong.x
-          y1 = latlong.y
-          y2 = prevlatlong.y
+        x1 = latlong.x
+        x2 = prevlatlong.x
+        y1 = latlong.y
+        y2 = prevlatlong.y
 
-          drawLine(x1, y1, x2, y2);
-          // drawDots(x1,y1)
-        }
+        drawYellowLine(x1, y1, x2, y2);
+        // print(lat, long, prevlat, prevlong)
+        drawDots(j, x1,y1)
+      }
       interpCount++
     } else {
       interpCount = 1
@@ -180,30 +216,66 @@ function drawMap() {
     var previousCoordinate = currentData[currentData.length - 2].geometry.coordinates
   }
 
-  myMap.map.jumpTo({ 'center': latestCoordinate });
   myMap.map.setPitch(pitch);
   // console.log( "centering on", latestCoordinate, "in an array of", coordinates.length, ", the last point was", previousCoordinate);
+  myMap.map.dragPan.disable();
+  myMap.map.scrollZoom.disable();
+  // detectZoom();
 
-  if(coordinates.length > 2) {
-    myMap.map.setBearing(bearingBetween(previousCoordinate, latestCoordinate));
-    // console.log(coordinates.length, previousCoordinate, latestCoordinate)
-  } else {
-    myMap.map.setBearing(0);
-    // console.log(coordinates.length, previousCoordinate, latestCoordinate)
-  } 
-  myMap.map.jumpTo({ 'center' : latestCoordinate, 'speed' : '1', 'curve' : '1',' essential' : 'true'});
+
+  if(coordinates.length % 2 == 0) {
+    updateBearing(coordinates, previousCoordinate, latestCoordinate)
+    myMap.map.jumpTo({ 'center' : latestCoordinate, 'speed' : '1', 'curve' : '1',' essential' : 'true'});
+    console.log("switching!", coordinates.length)
+  } else if (coordinates.length == 1)  {
+    updateBearing(coordinates, previousCoordinate, latestCoordinate)
+    myMap.map.jumpTo({ 'center' : latestCoordinate, 'speed' : '1', 'curve' : '1',' essential' : 'true'});
+    console.log("switching!", coordinates.length)
+  } else if(coordinates.length % 3 == 0) {
+    myMap.map.setBearing(0)
+    myMap.map.jumpTo({ 'center' : latestCoordinate, 'zoom' : '4', 'essential' : 'true'});
+    console.log("zoom to 4!")
+  } else if(coordinates.length % 4 == 0) {
+    myMap.map.setBearing(180)
+    myMap.map.setPitch(0)
+    myMap.map.jumpTo({ 'center' : latestCoordinate, 'zoom' : '2', 'essential' : 'true'});
+    console.log("switching!", "zoom to 2!")
+  } else if(coordinates.length % 5 == 0) {
+    myMap.map.jumpTo({ 'center' : latestCoordinate, 'zoom' : zoom, 'essential' : 'true'});
+    console.log("switching!", "zoom to default!")
+  }
+
+  drawTrack(coordinates, previousCoordinate, latestCoordinate)
+
+}
+
+      
+
+function drawTrack(coordinates, previousCoordinate, latestCoordinate) {
+
+  let pixelSnake = []
 
   for (let i = 1; i < (coordinates.length - 1); i += 1) {
 
-      const pointLat = coordinates[i][0]
-      const pointLong = coordinates[i][1]
-      const prevPointLat = coordinates[i-1][0]
-      const prevPointLong = coordinates[i-1][1]
-      const pointLatLong = myMap.latLngToPixel(pointLong, pointLat)
-      const prevPointLatLong = myMap.latLngToPixel(prevPointLong, prevPointLat)
+    const pointLat = coordinates[i][0]
+    const pointLong = coordinates[i][1]
+    // const prevPointLat = coordinates[i-1][0]
+    // const prevPointLong = coordinates[i-1][1]
 
-      drawLine(pointLatLong.x, pointLatLong.y, prevPointLatLong.x, prevPointLatLong.y)
-  }
+    const pointLatLongPixel = myMap.latLngToPixel(pointLong, pointLat)
+    // const prevPointLatLongPixel = await myMap.latLngToPixel(prevPointLong, prevPointLat)
+
+
+    if (pointLatLongPixel.x > 0 && pointLatLongPixel.x < 2000 && pointLatLongPixel.y > 0 && pointLatLongPixel.y < 2000) {
+      pixelSnake.push(pointLatLongPixel)
+    } else {
+      pixelSnake = []
+    }
+   }
+
+   for(let i = 1; i < pixelSnake.length; i++) {        
+        drawLine(pixelSnake[i].x, pixelSnake[i].y, pixelSnake[i-1].x, pixelSnake[i-1].y)
+   }
 
   if(coordinates.length > 2) {
     drawCanvas(previousCoordinate, latestCoordinate)
@@ -236,7 +308,7 @@ async function listenForNewPoints() {
 
 window.setInterval( function() {
   listenForNewPoints()     
-}, 500) // drawMap runs at this interval atm.
+}, 200) // drawMap runs at this interval atm.
   
 
 
