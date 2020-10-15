@@ -21,6 +21,21 @@ $('#userChat').submit(function(event) {
 	});
 });
 
+//handle post requests
+$('#emailForm').submit(function(event) {
+	event.preventDefault();
+	$.ajax({
+		url: 'http://server.fud.global/email',
+		type: 'POST',
+		data: $(this).serialize(),
+		success: function(data) {
+			console.log(data)
+			$('#emailForm')[0].reset();
+		}
+	});
+});
+
+
 //set chat to run every 10s
 window.setInterval(function(){
 	getChat();
