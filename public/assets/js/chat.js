@@ -43,7 +43,6 @@ $('#emailForm').submit(function(event) {
 	});
 });
 
-
 //set chat to run every 10s
 window.setInterval(function(){
 	getChat();
