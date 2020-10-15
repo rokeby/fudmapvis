@@ -12,10 +12,9 @@ async function getMarket () {
 	// 	+ market.bid_list[0].bidder + " has $" + market.current_funds + " at the moment.")
 	// 	.css({'font-color': 'white' })
 
-	if (bidList[bidList.length - 1] !== market.bid_list[0].price) {
-		for (var i = 0; i < market.bid_list.length; i++) {
+	for (var i = 0; i < market.bid_list.length; i++) {
+		if (!bidList.includes(market.bid_list[i].price)) {
 			bidList.push(market.bid_list[i].price)
-			console.log(bidList[bidList.length - 1])
 			if (bidList.length >= 15) {
 				bidList.shift()
 			}
@@ -26,12 +25,12 @@ async function getMarket () {
 
 
 
-
-	// console.log(bidList)
+// 
+	console.log('bid list is', bidList)
 	// console.log(market)
 
 	$("#buy-list").html('')
-	bidList.forEach(bid => $("#buy-list").append(bid + '<br>'))
+	bidList.forEach(bid => $("#buy-list").append('$' + bid.toFixed(2) + '<br>'))
 }
 
 
