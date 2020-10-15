@@ -2,7 +2,11 @@ import csv
 import re
 import json
 import regex as re
-from geojson import LineString, Feature, FeatureCollection
+from datetime import datetime
+from geojson import Point, LineString, Feature, FeatureCollection,MultiPoint
+
+#static files
+from storm_classifier import classifier
 
 with open('hurdat.csv', newline='') as csvfile:
 	data = csv.reader(csvfile, delimiter=',')
@@ -13,12 +17,12 @@ with open('hurdat.csv', newline='') as csvfile:
 		old.append(row)
 
 hurricane = []
-features = []
+list = []
 name='ABLE'
+num=0
 
 for row in old[1:]:
 	coord=[]
-	num=0
 	if row[4] != '':
 		if 'W' in row[5]:
 			coord.append(-float(re.sub('W', '', row[5])))
@@ -32,21 +36,33 @@ for row in old[1:]:
 			coord.append(-float(re.sub('S', '', row[4])))
 		else: break
 
-		hurricane.append(coord)
+		date = datetime.strptime(row[0], "%Y%m%d")
+		point = Feature(geometry=Point(coord), 
+			properties={
+				'class': row[3].strip(), 
+				'date': date.strftime('%m-%d-%Y'),
+				'risk': classifier[row[3].strip()]['risk'],
+				'report': classifier[row[3].strip()]['description']
+			})
+		hurricane.append(point)
 	else:
-		linestring = LineString(hurricane)
-		features.append(Feature(geometry=linestring, properties={'number': num, 'name': name}))
+		list.append(
+			{
+				'geoJSON': FeatureCollection(hurricane),
+				'metadata': {'number': num, 'name': name }
+			})
+		print(name, num)
 		name = row[1].strip()
 		hurricane=[]
 		num = num+1
 
-geojson = FeatureCollection(features)
+list.sort(key=lambda x: len(x['geoJSON']['features']), reverse=True)
+#print('max len is', len(list[0]['geoJSON']['features']), 'next is', len(list[1]['geoJSON']['features']), len(list[2]['geoJSON']['features']), len(list[3]['geoJSON']['features']), len(list[10]['geoJSON']['features']))
 
-features.pop(6)
+for hurr in list:
+	print(len(hurr['geoJSON']['features']))
 
-# print(geojson)
-
-json = json.dumps(geojson, indent=2, sort_keys=True)
-f = open("hurdat-big.geojson","w")
+json = json.dumps(list, indent=2, sort_keys=True)
+f = open("hurdat-featsize.geojson","w")
 f.write(json)
 f.close()
