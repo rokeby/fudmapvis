@@ -4,8 +4,8 @@ async function getChat () {
 	const chat = await response.json();
 	$("#chat").html('')
 	chat.forEach(msg => $("#chat").append(msg.agent + ': ' + msg.chat + '<br>')
-		.css({'font-color': msg.agent }))
-}
+		.css({'font-color': msg.agent })
+			
 
 //handle post requests
 $('#userChat').submit(function(event) {
