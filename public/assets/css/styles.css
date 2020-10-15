@@ -56,3 +56,7 @@ a.mapboxgl-ctrl-logo {
   border: 2px solid red;
   border-radius: 4px;
 }
+
+.mapboxgl-ctrl-bottom-right {
+	display: none !important;
+}

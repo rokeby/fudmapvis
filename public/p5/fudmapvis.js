@@ -55,9 +55,7 @@ function setup() {
   if (initialData.length > 2) { 
     bearing = bearingBetween(initialData[initialData.length - 2].geometry.coordinates, 
       initialData[initialData.length - 1].geometry.coordinates)
-  } 
-
-  else {
+  } else {
       bearing = 0
   }
 
@@ -76,13 +74,28 @@ function setup() {
 
   myMap = mappa.tileMap(options);
   myMap.overlay(canvas);
-
-  // you can pass a callback that will execute when the map is loaded and the p5 canvas is ready.
-  // myMap.overlay(canvas, updateHurricane);
 }
 
 function windowResized() {
   resizeCanvas(windowWidth, windowHeight);
+}
+
+function bearingBetween(coordinate1, coordinate2) {
+  var point1 = {
+    "type": "Feature",
+    "geometry": {
+      "type": "Point",
+      "coordinates": [coordinate1[0], coordinate1[1]]
+    }
+  };
+  var point2 = {
+    "type": "Feature",
+    "geometry": {
+      "type": "Point",
+      "coordinates": [coordinate2[0], coordinate2[1]]
+    }
+  };
+  return turf.bearing(point1, point2);
 }
 
 function drawLine(x1, x2, y1, y2) {
@@ -104,41 +117,9 @@ function drawYellowLine(x1, x2,y1,y2) {
 }
 
 function drawDots(iterator, x, y) {
-  ellipse(x, y, iterator*15, iterator*15);
-  fill (0, 100, 43, 1);
+  ellipse(x, y, iterator*30, iterator*25);
+  noFill()
   stroke("#00FF00");
-}
-
-function detectZoom() {
-  
-  let lastZoom = myMap.map.getZoom();
-  myMap.map.on('zoom', () => {
-    const currentZoom = myMap.map.getZoom();
-    if (currentZoom > lastZoom) {
-      // print("we zoomed in! zoom:", currentZoom)
-    } else {
-      // print("we zoomed out! zoom:", currentZoom)
-    }
-    lastZoom = currentZoom;
-  });
-}
-
-function bearingBetween(coordinate1, coordinate2) {
-  var point1 = {
-    "type": "Feature",
-    "geometry": {
-      "type": "Point",
-      "coordinates": [coordinate1[0], coordinate1[1]]
-    }
-  };
-  var point2 = {
-    "type": "Feature",
-    "geometry": {
-      "type": "Point",
-      "coordinates": [coordinate2[0], coordinate2[1]]
-    }
-  };
-  return turf.bearing(point1, point2);
 }
 
 function updateBearing(coordinates, previousCoordinate, latestCoordinate) {
@@ -175,7 +156,7 @@ function drawCanvas(startPoint, endPoint) {
       // push these coordinates to the feature collection we created
       rectCollection.features.push(pointOnLine);
   }
-     
+
       if (interpCount < rectCollection.features.length) {
 
         for(let j = 1; j < interpCount; j++) {
@@ -194,7 +175,6 @@ function drawCanvas(startPoint, endPoint) {
         y2 = prevlatlong.y
 
         drawYellowLine(x1, y1, x2, y2);
-        // print(lat, long, prevlat, prevlong)
         drawDots(j, x1,y1)
       }
       interpCount++
@@ -202,54 +182,6 @@ function drawCanvas(startPoint, endPoint) {
       interpCount = 1
     }
 }
-
-function drawMap() {
-  clear()
-  let coordinates = []
-
-  for (var i = 0; i < currentData.length; i++) {
-    coordinates.push(currentData[i].geometry.coordinates)
-  }
-
-  if (currentData.length > 2) {
-    var latestCoordinate = currentData[currentData.length - 1].geometry.coordinates
-    var previousCoordinate = currentData[currentData.length - 2].geometry.coordinates
-  }
-
-  myMap.map.setPitch(pitch);
-  // console.log( "centering on", latestCoordinate, "in an array of", coordinates.length, ", the last point was", previousCoordinate);
-  myMap.map.dragPan.disable();
-  myMap.map.scrollZoom.disable();
-  // detectZoom();
-
-
-  if(coordinates.length % 2 == 0) {
-    updateBearing(coordinates, previousCoordinate, latestCoordinate)
-    myMap.map.jumpTo({ 'center' : latestCoordinate, 'speed' : '1', 'curve' : '1',' essential' : 'true'});
-    console.log("switching!", coordinates.length)
-  } else if (coordinates.length == 1)  {
-    updateBearing(coordinates, previousCoordinate, latestCoordinate)
-    myMap.map.jumpTo({ 'center' : latestCoordinate, 'speed' : '1', 'curve' : '1',' essential' : 'true'});
-    console.log("switching!", coordinates.length)
-  } else if(coordinates.length % 3 == 0) {
-    myMap.map.setBearing(0)
-    myMap.map.jumpTo({ 'center' : latestCoordinate, 'zoom' : '4', 'essential' : 'true'});
-    console.log("zoom to 4!")
-  } else if(coordinates.length % 4 == 0) {
-    myMap.map.setBearing(180)
-    myMap.map.setPitch(0)
-    myMap.map.jumpTo({ 'center' : latestCoordinate, 'zoom' : '2', 'essential' : 'true'});
-    console.log("switching!", "zoom to 2!")
-  } else if(coordinates.length % 5 == 0) {
-    myMap.map.jumpTo({ 'center' : latestCoordinate, 'zoom' : zoom, 'essential' : 'true'});
-    console.log("switching!", "zoom to default!")
-  }
-
-  drawTrack(coordinates, previousCoordinate, latestCoordinate)
-
-}
-
-      
 
 function drawTrack(coordinates, previousCoordinate, latestCoordinate) {
 
@@ -282,6 +214,52 @@ function drawTrack(coordinates, previousCoordinate, latestCoordinate) {
   }
 }
 
+function drawMap() {
+  
+  clear()
+  let coordinates = []
+
+  for (var i = 0; i < currentData.length; i++) {
+    coordinates.push(currentData[i].geometry.coordinates)
+  }
+
+  if (currentData.length > 2) {
+    var latestCoordinate = currentData[currentData.length - 1].geometry.coordinates
+    var previousCoordinate = currentData[currentData.length - 2].geometry.coordinates
+  }
+
+  myMap.map.setPitch(pitch);
+  // console.log( "centering on", latestCoordinate, "in an array of", coordinates.length, ", the last point was", previousCoordinate);
+  myMap.map.dragPan.disable();
+  myMap.map.scrollZoom.disable();
+
+
+  if(coordinates.length % 2 == 0) {
+    updateBearing(coordinates, previousCoordinate, latestCoordinate)
+    myMap.map.jumpTo({ 'center' : latestCoordinate, 'speed' : '1', 'curve' : '1',' essential' : 'true'});
+    console.log("switching!", coordinates.length)
+  } else if (coordinates.length == 1)  {
+    updateBearing(coordinates, previousCoordinate, latestCoordinate)
+    myMap.map.jumpTo({ 'center' : latestCoordinate, 'speed' : '1', 'curve' : '1',' essential' : 'true'});
+    console.log("switching!", coordinates.length)
+  } else if(coordinates.length % 3 == 0) {
+    myMap.map.setBearing(0)
+    myMap.map.jumpTo({ 'center' : latestCoordinate, 'zoom' : '4', 'essential' : 'true'});
+    console.log("zoom to 4!")
+  } else if(coordinates.length % 4 == 0) {
+    myMap.map.setBearing(180)
+    myMap.map.setPitch(0)
+    myMap.map.jumpTo({ 'center' : latestCoordinate, 'zoom' : '2', 'essential' : 'true'});
+    console.log("switching!", "zoom to 2!")
+  } else if(coordinates.length % 5 == 0) {
+    myMap.map.jumpTo({ 'center' : latestCoordinate, 'zoom' : zoom, 'essential' : 'true'});
+    console.log("switching!", "zoom to default!")
+  }
+
+  drawTrack(coordinates, previousCoordinate, latestCoordinate)
+
+}
+
 function newHurricane() {
   console.log('time for a new hurricane')
 }
@@ -308,9 +286,7 @@ async function listenForNewPoints() {
 
 window.setInterval( function() {
   listenForNewPoints()     
-}, 1000) // drawMap runs at this interval atm.
+}, 500) // drawMap runs at this interval atm.
   
-$(".mapboxgl-ctrl-bottom-right").css({'display' : 'none'})
-
 
 
