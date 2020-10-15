@@ -16,6 +16,7 @@ $('#userChat').submit(function(event) {
 		data: $(this).serialize(),
 		success: function(data) {
 			console.log(data)
+			$('#userChat')[0].reset();
 		}
 	});
 });
