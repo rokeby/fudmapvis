@@ -1,11 +1,17 @@
+var dict = {
+	agent : "pink",
+	weather : "lightblue",
+	market : "yellow"
+}
+
 async function getChat () {
 
 	const response = await fetch('https://server.fud.global/chat')
 	const chat = await response.json();
 	$("#chat").html('')
-	chat.forEach(msg => $("#chat").append(msg.agent + ': ' + msg.chat + '<br>')
-		.css({'font-color': msg.agent })
-			
+	chat.forEach(msg => $("#chat").append(
+		'<span class="chatEntity" style="color: ' + dict[msg.entityType]+ '">' + msg.agent + ': </span><span class="chatEntity" style="color: ' + dict[msg.entityType] + '">' + msg.chat + '</span><br>'))
+}
 
 //handle post requests
 $('#userChat').submit(function(event) {
