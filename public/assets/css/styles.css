@@ -39,9 +39,10 @@ a.mapboxgl-ctrl-logo {
 	bottom: 120px;
 	display: block;
 	z-index: 1;
-	color: green;
+	color: white;
+	font: 12px Courier, sans-serif;
+	max-width: 30vw;
 }
-
 
 #form {
 	position: fixed;
@@ -49,4 +50,9 @@ a.mapboxgl-ctrl-logo {
 	bottom: 20px;
 	display: block;
 	z-index: 1;
+}
+
+#userChat.input[type=text] {
+  border: 2px solid red;
+  border-radius: 4px;
 }
