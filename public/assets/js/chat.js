@@ -1,6 +1,6 @@
 async function getChat () {
 
-	const response = await fetch('http://server.fud.global/chat')
+	const response = await fetch('https://server.fud.global/chat')
 	const chat = await response.json();
 	$("#chat").html('')
 	chat.forEach(msg => $("#chat").append(msg.agent + ': ' + msg.chat + '<br>')

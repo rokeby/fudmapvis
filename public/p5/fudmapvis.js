@@ -74,6 +74,7 @@ function setup() {
 
   myMap = mappa.tileMap(options);
   myMap.overlay(canvas);
+
 }
 
 function windowResized() {
@@ -236,25 +237,29 @@ function drawMap() {
 
   if(coordinates.length % 2 == 0) {
     updateBearing(coordinates, previousCoordinate, latestCoordinate)
-    myMap.map.jumpTo({ 'center' : latestCoordinate, 'speed' : '1', 'curve' : '1',' essential' : 'true'});
-    console.log("switching!", coordinates.length)
-  } else if (coordinates.length == 1)  {
+    myMap.map.jumpTo({ 'center' : latestCoordinate });
+    // console.log("switching!", coordinates.length)
+  } 
+  else if (coordinates.length == 1)  {
     updateBearing(coordinates, previousCoordinate, latestCoordinate)
-    myMap.map.jumpTo({ 'center' : latestCoordinate, 'speed' : '1', 'curve' : '1',' essential' : 'true'});
-    console.log("switching!", coordinates.length)
-  } else if(coordinates.length % 3 == 0) {
+    myMap.map.jumpTo({ 'center' : latestCoordinate });
+      // console.log("switching!", coordinates.length)
+  } 
+  else if (coordinates.length % 3 == 0) {
     myMap.map.setBearing(0)
-    myMap.map.jumpTo({ 'center' : latestCoordinate, 'zoom' : '4', 'essential' : 'true'});
-    console.log("zoom to 4!")
-  } else if(coordinates.length % 4 == 0) {
+    myMap.map.jumpTo({ 'center' : latestCoordinate, 'zoom' : '4' });
+      // console.log("zoom to 4!")
+  } 
+  else if (coordinates.length % 4 == 0) {
     myMap.map.setBearing(180)
     myMap.map.setPitch(0)
-    myMap.map.jumpTo({ 'center' : latestCoordinate, 'zoom' : '2', 'essential' : 'true'});
-    console.log("switching!", "zoom to 2!")
-  } else if(coordinates.length % 5 == 0) {
-    myMap.map.jumpTo({ 'center' : latestCoordinate, 'zoom' : zoom, 'essential' : 'true'});
-    console.log("switching!", "zoom to default!")
-  }
+      myMap.map.jumpTo({ 'center' : latestCoordinate, 'zoom' : '2' });
+    // console.log("switching!", "zoom to 2!")
+  } 
+  else if (coordinates.length % 5 == 0) {
+    myMap.map.jumpTo({ 'center' : latestCoordinate, 'zoom' : zoom });
+    // console.log("switching!", "zoom to default!")
+    }
 
   drawTrack(coordinates, previousCoordinate, latestCoordinate)
 
@@ -286,7 +291,7 @@ async function listenForNewPoints() {
 
 window.setInterval( function() {
   listenForNewPoints()     
-}, 500) // drawMap runs at this interval atm.
+}, 500)
   
 
 

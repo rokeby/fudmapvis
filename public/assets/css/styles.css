@@ -9,14 +9,8 @@ a.mapboxgl-ctrl-logo {
 }
 
 .main {
-	display: flex;
-	flex-flow: row;
-}
-
-.left {
-}
-
-.right {
+	width: 100vw;
+	height: 100vh;
 }
 
 #mapvis {
@@ -29,11 +23,18 @@ a.mapboxgl-ctrl-logo {
 }
 
 #market {
+	position: fixed;
+	right: 50px;
+	bottom: 120px;
 	display: block;
-/*	width: 50vw;
-*/}
+	z-index: 1;
+	color: white;
+	font: 12px Courier, sans-serif;
+	max-width: 30vw;
+}
 
 #chat {
+	padding: 10px;
 	position: fixed;
 	left: 50px;
 	bottom: 120px;
@@ -42,6 +43,7 @@ a.mapboxgl-ctrl-logo {
 	color: white;
 	font: 12px Courier, sans-serif;
 	max-width: 30vw;
+	border: 1px white solid;
 }
 
 #form {
