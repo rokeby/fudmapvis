@@ -1,7 +1,9 @@
 var dict = {
 	agent : "pink",
 	weather : "lightblue",
-	market : "yellow"
+	market : "yellow",
+	oracle: "gold",
+	person: "#00FF00",
 }
 
 async function getChat () {
@@ -10,7 +12,7 @@ async function getChat () {
 	const chat = await response.json();
 	$("#chat").html('')
 	chat.forEach(msg => $("#chat").append(
-		'<span class="chatEntity" style="color: ' + dict[msg.entityType]+ '">' + msg.agent + ': </span><span class="chatEntity" style="color: ' + dict[msg.entityType] + '">' + msg.chat + '</span><br>'))
+		'<div class="chatLine"><span class="chatEntity" style="color: ' + dict[msg.entityType]+ '">' + msg.agent + ': </span><span class="chatEntity" style="color: ' + dict[msg.entityType] + '">' + msg.chat + '</span></div><br>'))
 }
 
 //handle post requests

@@ -21,23 +21,38 @@
     </div>
 
     <div id="market">
-      <div id="buy-list">
+      <div id="buy">
+        <div id="buy-header">
+          bids
+        </div>
+        <div id="buy-list">
+        </div>
       </div>
-      <div id="sell-list">
+      <div id="sell">
+        <div id="sell-header">
+          asks
+        </div>
+        <div id="sell-list">
+          waiting for asks...
+        </div>
       </div>
     </div>
 
-    <div id="chat">
+    <div id="chatContainer">
+
+      <div id="chat">
+      </div>
+      
+      <div id="chatForm">
+        <form id="userChat">
+          <input id="username" type="text" name="user" placeholder ="username"><br>
+          <input id="userMessage" type="text" name="chat_string" placeholder ="message"><br>
+          <input type="submit" value="send">
+        </form>
+      </div>
+
     </div>
     
-    <div id="form">
-      <form id="userChat">
-        <input type="text" name="user" placeholder ="username"><br>
-        <input type="text" name="chat_string" placeholder ="message"><br>
-        <input type="submit" value="send ☠️">
-      </form>
-    </div>
-
     <div id="email">
       <form id="emailForm">
         <input type="text" name="email" placeholder ="trader@fud.global"><br>

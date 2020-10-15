@@ -24,40 +24,95 @@ a.mapboxgl-ctrl-logo {
 
 #market {
 	position: fixed;
+	display: flex;
+	flex-flow: row;
 	right: 50px;
-	bottom: 120px;
-	display: block;
+	bottom: 50px;
 	z-index: 1;
 	color: white;
-	font: 12px Courier, sans-serif;
+	font: 14px Courier, sans-serif;
 	max-width: 30vw;
 }
 
-#chat {
+#buy, #sell {
 	padding: 10px;
-	position: fixed;
+	border: 1px white solid;
+	width: 10vw;
+}
+
+#chat {
+	display: flex;
+	flex-flow: column;
+	justify-content: flex-end;
 	left: 50px;
 	bottom: 120px;
-	display: block;
-	z-index: 1;
+	padding: 10px;
+	font: 14px Courier, sans-serif;
 	color: white;
-	font: 12px Courier, sans-serif;
-	max-width: 30vw;
+	z-index: 1;
 	border: 1px white solid;
+}
+
+#chatContainer{
+	position: fixed;
+	bottom: 10vh;
+	left: 10vh;
+	z-index: 1;
+	width: 30vw;
+}
+
+#chatForm {
+	display: flex;
+	flex-flow: column;
+	justify-content: space-around;
+	z-index: 1;
+}
+
+#userChat {
+	display: flex;
+	flex-flow: row wrap;
+	justify-content: flex-start;
+}
+
+#userChat > input[type=text] {
+  border: 1px solid white;
+  border-radius: 0px;
+  background-color: transparent;
+  color: white;
+  padding: 3px;
+  font: 14px Courier, sans-serif;
+}
+
+#username {
+	width: 7vw;
+}
+
+#userMessage {
+	width: 15vw;
+}
+
+#userChat > input[type=submit] {
+	width: 5vw;
 }
 
 #form {
 	position: fixed;
 	left: 50px;
-	bottom: 20px;
+	bottom: 50px;
 	display: block;
 	z-index: 1;
 }
 
-#userChat.input[type=text] {
-  border: 2px solid red;
-  border-radius: 4px;
+#email {
+	position: fixed;
+	top: 50px;
+	left: 50px;
 }
+
+#emailForm {
+
+}
+
 
 .mapboxgl-ctrl-bottom-right {
 	display: none !important;

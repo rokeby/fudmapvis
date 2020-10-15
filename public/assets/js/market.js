@@ -5,7 +5,6 @@ async function getMarket () {
 
 	const response = await fetch('https://server.fud.global/market')
 	const market = await response.json();
-	// console.log(market)
 
 	// $("#sell-list")
 	// $("#market").append(market.bid_list[0].bidder + ' placed a bid for $' + market.price + '!<br>'
@@ -23,19 +22,15 @@ async function getMarket () {
 
 	// askList.push(market.price)
 
-
-
-// 
-	console.log('bid list is', bidList)
+	// console.log('bid list is', bidList)
 	// console.log(market)
 
 	$("#buy-list").html('')
+
 	bidList.forEach(bid => $("#buy-list").append('$' + bid.toFixed(2) + '<br>'))
 }
 
-
-
-//set chat to run every 10s
+//set market to run every 1s
 window.setInterval(function(){
 	getMarket();
 }, 1000)
