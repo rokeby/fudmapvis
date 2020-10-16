@@ -217,12 +217,10 @@ body {
 		overflow: hidden;
 	}
 	#interface {
-		display: none;
 		flex-flow: column;
 		justify-content: center;
 	}
 	#chatContainer{
-		display: none;
 		position: absolute;
 		left: 8vw;
 		right: 8vw;
@@ -268,7 +266,6 @@ body {
 	}
 	#email {
 		display: flex;
-		display: none;
 		flex-flow: column;
 		position: fixed;
 		left: 8vw;
@@ -314,7 +311,6 @@ body {
 		cursor: crosshair !important;
 	}
 	#market {
-		display: none;
 		position: fixed;
 		flex-flow: column;
 		right: 8vw;
@@ -332,7 +328,7 @@ body {
 	#buy {
 		margin-bottom: 5px;
 	}
-	#consoleData, #show, #hide, #email, #chatContainer, #interface {
+	#consoleData, #show, #hide, #email, #market {
 		display: none;
 	}
 }

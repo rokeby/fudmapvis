@@ -3,19 +3,13 @@ const key = 'pk.eyJ1Ijoicm9rZWJ5IiwiYSI6ImNrZWViMjYzdDBqcjUzMm1sZ2IzdmxvdXMifQ.Z
 const mappa = new Mappa('MapboxGL', key);
 let myMap;
 let canvas;
-let hurricanes;
-const geoJSONlatlong = []
 const zoom = 8
 let preJSON
-let array = []
-let latlong = []
-let dim = 100
-let stage = 1
 let pitch = 50
 let mapStyles = {
   "dawn" : "mapbox://styles/rokeby/ckgbku2r52ar219qukmelh6dr",
   "day" : "mapbox://styles/rokeby/ckgbl5cah1wkv19o2asy4tjb1",
-  "dusk" : "mapbox://styles/rokeby/ckgbjx2nd0qpj19k5b6tgl69l",
+  "dusk" : "mapbox://styles/rokeby/ckfvgjjsy6vkw19mkij8g9v3c",
   "night" : "mapbox://styles/rokeby/ckfvgjjsy6vkw19mkij8g9v3c",
 }
 
@@ -27,12 +21,12 @@ let currentData = {}
 let geojsonPoint = {
   "type": "FeatureCollection",
   "features": [{
-      "type": "Feature",
-      "geometry": {
-          "type": "LineString",
-          "coordinates": [
-          ]
-      }
+    "type": "Feature",
+    "geometry": {
+      "type": "LineString",
+      "coordinates": [
+      ]
+    }
   }]
 };
 
@@ -86,8 +80,7 @@ function setup() {
     lat: initialData[initialData.length - 1].geometry.coordinates[1],
     lng: initialData[initialData.length - 1].geometry.coordinates[0],
     zoom: zoom,
-    studio: true, // false to use non studio styles
-    // style: 'mapbox://styles/rokeby/ckfvgjjsy6vkw19mkij8g9v3c',
+    studio: true,
     style: mapStyles[dayPart],
     pitch: pitch,
     bearing: bearing,
