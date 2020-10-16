@@ -1,10 +1,20 @@
+var dict = {
+	agent : "MistyRose",
+	weather : "#b2ebff",
+	market : "yellow",
+	oracle: "gold",
+	person: "PaleGreen",
+}
+
 async function getChat () {
 
 	const response = await fetch('https://server.fud.global/chat')
 	const chat = await response.json();
 	$("#chat").html('')
-	chat.forEach(msg => $("#chat").append(msg.agent + ': ' + msg.chat + '<br>')
-		.css({'font-color': msg.agent }))
+	chat.forEach(msg => $("#chat").append(
+		'<div class="chatLine"><span class="chatEntity" style="color: ' + dict[msg.entityType]+ '">' + msg.agent + ': </span><span class="chatEntity" style="color: ' + dict[msg.entityType] + '">' + msg.chat + '</span></div>'))
+
+	// console.log($("#chat").text().length)
 }
 
 //handle post requests
@@ -34,7 +44,6 @@ $('#emailForm').submit(function(event) {
 		}
 	});
 });
-
 
 //set chat to run every 10s
 window.setInterval(function(){
