@@ -250,7 +250,7 @@ span {
 		background-color: transparent;
 		color: white;
 		padding: 3px;
-		font: 13px Courier, sans-serif;
+		font: 16px Courier, sans-serif;
 		outline: none;
 	}
 	#username {
@@ -266,6 +266,7 @@ span {
 		border: 1px white solid;
 		color: white;
 		background-color: transparent;
+		font: 16px Courier, sans-serif;
 	}
 	#email {
 		display: flex;
@@ -294,7 +295,7 @@ span {
 		background-color: transparent;
 		color: white;
 		padding: 3px;
-		font: 13px Courier, sans-serif;
+		font: 16px Courier, sans-serif;
 		outline: none;
 	}
 	#emailInput {
