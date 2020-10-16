@@ -221,15 +221,16 @@ span {
 	display: none !important;
 }
 
+#mapvis, #mapvis * {
+	overflow: hidden !important;
+}
+
+body {
+	overflow: hidden !important;
+}
+
+
 @media screen and (max-width: 600px) {
-
-	#mapvis, #mapvis * {
-		overflow: hidden;
-	}
-
-	body {
-		overflow: hidden;
-	}
 
 	#interface {
 		display: flex;
