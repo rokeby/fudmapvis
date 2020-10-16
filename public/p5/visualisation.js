@@ -211,7 +211,7 @@ function drawCanvas(startPoint, endPoint) {
         y2 = prevlatlong.y
 
         drawYellowLine(x1, y1, x2, y2);
-        stroke(0, 0, 255);
+        stroke(255,40,0);
         drawDots(j, x1,y1)
 
       }
