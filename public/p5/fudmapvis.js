@@ -50,6 +50,8 @@ function setup() {
      }
   }
 
+  colorMode(RGB, 100);  
+
   console.log("initial coords", initialData[initialData.length - 1].geometry.coordinates)
 
   if (initialData.length > 2) { 
@@ -101,26 +103,26 @@ function bearingBetween(coordinate1, coordinate2) {
 
 function drawLine(x1, x2, y1, y2) {
   line(x1, x2,y1,y2);
-  colorMode(HSB, 100);  
-  stroke(120, 100, 100);
+  stroke(255, 0, 0);
+  noFill()
 }
 
 function drawBlueLine(x1, x2,y1,y2) {
   line(x1, x2,y1,y2);
-  colorMode(RGB, 100);  
-  stroke("#FFFFFF");
+  stroke(255, 0, 0);
+  noFill()
 }
 
 function drawYellowLine(x1, x2,y1,y2) {
-  colorMode(HSB, 100);  
-  stroke(60, 100, 100);
+  stroke(255, 255, 0);
   line(x1,x2,y1,y2);
+  noFill()
 }
 
 function drawDots(iterator, x, y) {
-  ellipse(x, y, iterator*30, iterator*25);
+  currentZoom = myMap.map.getZoom();
+  ellipse(x, y, iterator*(currentZoom * 3), iterator*(currentZoom * 2));
   noFill()
-  stroke("#00FF00");
 }
 
 function updateBearing(coordinates, previousCoordinate, latestCoordinate) {
@@ -175,8 +177,10 @@ function drawCanvas(startPoint, endPoint) {
         y1 = latlong.y
         y2 = prevlatlong.y
 
-        drawYellowLine(x1, y1, x2, y2);
+        // drawYellowLine(x1, y1, x2, y2);
+        stroke(0, 0, 255);
         drawDots(j, x1,y1)
+
       }
       interpCount++
     } else {
@@ -190,21 +194,22 @@ function drawProximate() {
   let hurricaneProperties = currentData[currentData.length - 1].properties
 
   let proximateCountry = hurricaneProperties.proximity.country
-  let proxLat = hurricaneProperties.proximity[0].lat
-  let proxLng = hurricaneProperties.proximity[0].lon
-  let proxPlaceName = hurricaneProperties.proximity[0].name
   let landfall = hurricaneProperties.landfall
   let verboseStatus = hurricaneProperties.report
   let riskValue = hurricaneProperties.risk
   let windspeed = hurricaneProperties.speed
   let highestRisk = hurricaneProperties.highest_risk
 
-if (proxPlaceName != undefined) {
-  const proxLatLongPixel = myMap.latLngToPixel(proxLat, proxLng)
-  console.log("there is a proximity to", proxPlaceName, "at", proxLatLongPixel)  
-  triangle(proxLatLongPixel.x + 5, proxLatLongPixel.y, proxLatLongPixel.x - 5, proxLatLongPixel.y, proxLatLongPixel.x, proxLatLongPixel.y + 5)
-  stroke("#0000FF")
-}
+if (hurricaneProperties.proximity[0] != undefined) {
+    let proxLat = hurricaneProperties.proximity[0].lat
+    let proxLng = hurricaneProperties.proximity[0].lon
+    let proxPlaceName = hurricaneProperties.proximity[0].name
+
+    const proxLatLongPixel = myMap.latLngToPixel(proxLat, proxLng)
+    console.log("there is a proximity to", proxPlaceName, "at", proxLatLongPixel)  
+    triangle(proxLatLongPixel.x + 5, proxLatLongPixel.y, proxLatLongPixel.x - 5, proxLatLongPixel.y, proxLatLongPixel.x, proxLatLongPixel.y + 5)
+    stroke(0, 0, 255)
+  }
 
 }
 
@@ -230,9 +235,12 @@ function drawTrack(coordinates, previousCoordinate, latestCoordinate) {
     }
    }
 
-   for(let i = 1; i < pixelSnake.length; i++) {        
-        drawLine(pixelSnake[i].x, pixelSnake[i].y, pixelSnake[i-1].x, pixelSnake[i-1].y)
-   }
+   if (pixelSnake.length >= 1) {
+      for(let i = 1; i < pixelSnake.length; i++) {        
+       drawLine(pixelSnake[i].x, pixelSnake[i].y, pixelSnake[i-1].x, pixelSnake[i-1].y)
+        stroke(255, 255, 255);
+       ellipse(pixelSnake[0].x, pixelSnake[0].y, 5, 5)
+      }}
 
   if(coordinates.length > 2) {
     drawCanvas(previousCoordinate, latestCoordinate)
@@ -257,6 +265,9 @@ function drawMap() {
   // console.log( "centering on", latestCoordinate, "in an array of", coordinates.length, ", the last point was", previousCoordinate);
   myMap.map.dragPan.disable();
   myMap.map.scrollZoom.disable();
+  myMap.map.doubleClickZoom.disable();
+  myMap.map.touchZoomRotate.disable();
+  myMap.map.touchPitch.disable();
 
 
   if(coordinates.length % 2 == 0) {
@@ -277,11 +288,11 @@ function drawMap() {
   else if (coordinates.length % 4 == 0) {
     myMap.map.setBearing(180)
     myMap.map.setPitch(0)
-      myMap.map.jumpTo({ 'center' : latestCoordinate, 'zoom' : '8' });
+      myMap.map.jumpTo({ 'center' : latestCoordinate, 'zoom' : '10' });
     // console.log("switching!", "zoom to 2!")
   } 
   else if (coordinates.length % 5 == 0) {
-    myMap.map.jumpTo({ 'center' : latestCoordinate, 'zoom' : zoom });
+    myMap.map.jumpTo({ 'center' : latestCoordinate, 'zoom' : '6' });
     // myMap.map.setStyle('mapbox://styles/mapbox/satellite-v9');
     // console.log("switching!", "zoom to default!")
     }
