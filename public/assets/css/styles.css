@@ -199,13 +199,7 @@ span {
 .mapboxgl-ctrl-bottom-right {
 	display: none !important;
 }
-/*#mapvis, #mapvis * {
-	overflow: hidden !important;
-}
-body {
-	overflow: hidden !important;
-}
-*/
+
 #showMarket {
 	display: none;
 }
@@ -214,7 +208,7 @@ body {
 
 @media screen and (max-width: 800px) {
 	body {
-		overflow: hidden;
+		/*overflow: hidden;*/
 	}
 	#interface {
 		flex-flow: column;
