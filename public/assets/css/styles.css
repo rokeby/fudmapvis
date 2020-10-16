@@ -17,6 +17,10 @@ a.mapboxgl-ctrl-logo {
 	height: 100vh;
 }
 
+span {
+	line-height: 1.0;
+}
+
 #mapvis {
 	width: inherit;
 }
@@ -54,7 +58,7 @@ a.mapboxgl-ctrl-logo {
 	bottom: 6vh;
 	left: 6vh;
 	z-index: 1;
-	width: 30vw;
+	width: 40vw;
 }
 
 	#chat {
