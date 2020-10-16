@@ -227,6 +227,10 @@ span {
 		overflow: hidden;
 	}
 
+	body {
+		overflow: hidden;
+	}
+
 	#interface {
 		display: flex;
 		flex-flow: column;
