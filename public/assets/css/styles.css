@@ -229,6 +229,9 @@ body {
 	overflow: hidden !important;
 }
 
+#showMarket {
+	display: none;
+}
 
 @media screen and (max-width: 600px) {
 
