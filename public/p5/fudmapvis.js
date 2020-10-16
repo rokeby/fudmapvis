@@ -88,7 +88,7 @@ function setup() {
     zoom: zoom,
     studio: true, // false to use non studio styles
     // style: 'mapbox://styles/rokeby/ckfvgjjsy6vkw19mkij8g9v3c',
-    style: mapStyles["night"],
+    style: mapStyles[dayPart],
     pitch: pitch,
     bearing: bearing,
     worldCopyJump: false,
