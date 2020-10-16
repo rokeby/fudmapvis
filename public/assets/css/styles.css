@@ -130,7 +130,7 @@ span {
 	flex-flow: row wrap;
 	justify-content: space-between;
 }
-#consoleData {
+#console {
 	visibility: visible;	
 	position: fixed;
 	top: 5px;
@@ -138,6 +138,8 @@ span {
 	color: #FFFFFF;
 	font: 13px Courier, sans-serif;
 	cursor: help;
+}
+#login {
 }
 #back {
 	position: fixed;
@@ -334,7 +336,7 @@ span {
 	#buy {
 		margin-bottom: 5px;
 	}
-	#consoleData, #email, #market, #userChat {
+	#consoleData, #login, #email, #market, #userChat {
 		display: none;
 	}
 

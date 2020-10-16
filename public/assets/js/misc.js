@@ -1,12 +1,12 @@
-$("#login").click( function() {
+$("#consoleData").click( function() {
 	$("#email").toggle()
 	$("#chatContainer").toggle()
 	$("#back").toggle()
-	$("#console").toggle()
+	$("#consoleData").toggle()
 })
 
 $("#back").click( function() {
-	$("#console").toggle()
+	$("#consoleData").toggle()
 	$("#chatContainer").toggle()
 	$("#back").toggle()
 	$("#email").toggle()	
@@ -28,4 +28,5 @@ $("#show").click( function() {
 $("#showMarket").click( function() {
 	$("#market").toggle()
 	$("#chatContainer").toggle()
-}) 
+})
+

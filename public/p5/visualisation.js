@@ -233,20 +233,46 @@ function drawProperties() {
   let highestRisk = hurricaneProperties.highest_risk
 
   if (hurricaneProperties.proximity[0] != undefined) {
-    let proximateCountry = hurricaneProperties.proximity.country
+    let proxCountry = hurricaneProperties.proximity[0].country
     let proxLat = hurricaneProperties.proximity[0].lat
     let proxLng = hurricaneProperties.proximity[0].lon
     let proxPlaceName = hurricaneProperties.proximity[0].name
+    let proxDistance = hurricaneProperties.proximity[0].distance
+    let proxPop = hurricaneProperties.proximity[0].pop
 
     const proxLatLongPixel = myMap.latLngToPixel(proxLat, proxLng)
     // console.log("there is a proximity to", proxPlaceName, "at", proxLatLongPixel)  
     stroke(255,215,0)
     fill(255,215,0)
     triangle(proxLatLongPixel.x + 5, proxLatLongPixel.y, proxLatLongPixel.x - 5, proxLatLongPixel.y, proxLatLongPixel.x, proxLatLongPixel.y + 5)
+
+    if (proxDistance < 400 && proxDistance > 200) {
+      $("#consoleData").html(proxPlaceName + ', ' + proxCountry.toUpperCase() + ' is only ' + proxDistance.toFixed(0) + 'km away...');
+      setTimeout(function() { 
+        setTimeout(function() {
+          $("#consoleData").html('');
+          }, 5000); 
+      }, 3000);
+    } else if (proxDistance <= 200 && proxDistance > 0) {
+      $("#consoleData").html('only' + proxDistance.toFixed(0) + "km from " + proxPlaceName + ', ' + proxCountry.toUpperCase() + '...');
+      setTimeout(function() { 
+        setTimeout(function() {
+          $("#consoleData").html('');
+          }, 5000);
+      }, 3000);
+    } else if (landfall == true) {
+      $("#consoleData").html('LANDFALL at ' + proxPlaceName + ', ' + proxCountry.toUpperCase() + '!');
+      setTimeout(function() { 
+        setTimeout(function() {
+          $("#consoleData").html('');
+          }, 5000); 
+      }, 3000);
+    }
+
     }
 
     // $("#consoleData").html("current storm is a " + verboseStatus.toLowerCase() + " at " + windspeed + " knots...").css({ "display" : "block"})
-    $("#consoleData").html("login")
+  $("#console #login").html("login")
 
 }
 
@@ -319,7 +345,7 @@ function drawMap() {
   } 
   else if (coordinates.length % 3 == 0) {
     myMap.map.setBearing(0)
-    myMap.map.jumpTo({ 'center' : latestCoordinate, 'zoom' : '5' });
+    myMap.map.jumpTo({ 'center' : latestCoordinate, 'zoom' : '2' });
       // console.log("zoom to 4!")
   } 
   else if (coordinates.length % 4 == 0) {
@@ -330,7 +356,7 @@ function drawMap() {
   } 
   else if (coordinates.length % 5 == 0) {
     myMap.map.setPitch(60)
-    myMap.map.jumpTo({ 'center' : latestCoordinate, 'zoom' : '2' });
+    myMap.map.jumpTo({ 'center' : latestCoordinate, 'zoom' : '5' });
     // console.log("switching!", "zoom to default!")
     }
 
@@ -341,6 +367,9 @@ function drawMap() {
 
 function newHurricane() {
   // console.log('time for a new hurricane')
+  setTimeout(function() {
+    $("#consoleData").html('a new storm has begun...');
+    }, 5000);
 }
 
 function newPoint() {
