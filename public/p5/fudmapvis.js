@@ -11,7 +11,13 @@ let array = []
 let latlong = []
 let dim = 100
 let stage = 1
-let pitch = 60
+let pitch = 50
+let mapStyles = {
+  "dawn" : "mapbox://styles/rokeby/ckgbku2r52ar219qukmelh6dr",
+  "day" : "mapbox://styles/rokeby/ckgbl5cah1wkv19o2asy4tjb1",
+  "dusk" : "mapbox://styles/rokeby/ckgbjx2nd0qpj19k5b6tgl69l",
+  "night" : "mapbox://styles/rokeby/ckfvgjjsy6vkw19mkij8g9v3c",
+}
 
 //things below this line we are using
 const interpNum = 20;
@@ -35,6 +41,9 @@ function preload() {
 }
 
 function setup() {
+
+
+  checkTime() 
 
   var canvas = createCanvas(windowWidth, windowHeight);
   canvas.style('display', 'block');
@@ -66,12 +75,14 @@ function setup() {
     lng: initialData[initialData.length - 1].geometry.coordinates[0],
     zoom: zoom,
     studio: true, // false to use non studio styles
-    style: 'mapbox://styles/rokeby/ckfvgjjsy6vkw19mkij8g9v3c',
+    // style: 'mapbox://styles/rokeby/ckfvgjjsy6vkw19mkij8g9v3c',
+    style: 'mapbox://styles/rokeby/ckgbjx2nd0qpj19k5b6tgl69l',
     pitch: pitch,
     bearing: bearing,
     worldCopyJump: false,
     noWrap: true,
     maxBounds: [ [-180, -85], [180, 85] ],
+    touchPitch: false,
   }
 
   myMap = mappa.tileMap(options);
@@ -81,6 +92,27 @@ function setup() {
 
 function windowResized() {
   resizeCanvas(windowWidth, windowHeight);
+}
+
+function checkTime() {
+  var d = new Date(); // for now
+  var hours = d.getHours(); // => 9
+  var minutes = d.getMinutes(); // => 9
+  console.log("hours now", hours, "minutes now", minutes)
+
+  
+
+  // currentStyle = myMap.map.getStyle();
+
+  // if (hours > 7 && currentStyle != 'mapbox://styles/rokeby/ckfvgjjsy6vkw19mkij8g9v3c') {
+  //   myMap.map.setStyle('mapbox://styles/rokeby/ckgbjx2nd0qpj19k5b6tgl69l');
+  //   console.log("setting up morning!")
+  // } 
+
+  // else if (hours <= 7 ) {
+  //   // myMap.map.setStyle('mapbox://styles/rokeby/ckfvgjjsy6vkw19mkij8g9v3c');
+  //   console.log("setting up night time!")
+  // }
 }
 
 function bearingBetween(coordinate1, coordinate2) {
@@ -200,16 +232,17 @@ function drawProximate() {
   let windspeed = hurricaneProperties.speed
   let highestRisk = hurricaneProperties.highest_risk
 
-if (hurricaneProperties.proximity[0] != undefined) {
+  if (hurricaneProperties.proximity[0] != undefined) {
     let proxLat = hurricaneProperties.proximity[0].lat
     let proxLng = hurricaneProperties.proximity[0].lon
     let proxPlaceName = hurricaneProperties.proximity[0].name
 
     const proxLatLongPixel = myMap.latLngToPixel(proxLat, proxLng)
     console.log("there is a proximity to", proxPlaceName, "at", proxLatLongPixel)  
+    stroke(255,215,0)
+    fill(255,215,0)
     triangle(proxLatLongPixel.x + 5, proxLatLongPixel.y, proxLatLongPixel.x - 5, proxLatLongPixel.y, proxLatLongPixel.x, proxLatLongPixel.y + 5)
-    stroke(0, 0, 255)
-  }
+    }
 
 }
 
@@ -221,8 +254,6 @@ function drawTrack(coordinates, previousCoordinate, latestCoordinate) {
 
     const pointLat = coordinates[i][0]
     const pointLong = coordinates[i][1]
-    // const prevPointLat = coordinates[i-1][0]
-    // const prevPointLong = coordinates[i-1][1]
 
     const pointLatLongPixel = myMap.latLngToPixel(pointLong, pointLat)
     // const prevPointLatLongPixel = await myMap.latLngToPixel(prevPointLong, prevPointLat)
@@ -237,9 +268,10 @@ function drawTrack(coordinates, previousCoordinate, latestCoordinate) {
 
    if (pixelSnake.length >= 1) {
       for(let i = 1; i < pixelSnake.length; i++) {        
+        stroke(255, 0, 0);
        drawLine(pixelSnake[i].x, pixelSnake[i].y, pixelSnake[i-1].x, pixelSnake[i-1].y)
-        stroke(255, 255, 255);
-       ellipse(pixelSnake[0].x, pixelSnake[0].y, 5, 5)
+        stroke(0, 255, 0);
+       ellipse(pixelSnake[0].x, pixelSnake[0].y, 3, 5)
       }}
 
   if(coordinates.length > 2) {
@@ -250,6 +282,7 @@ function drawTrack(coordinates, previousCoordinate, latestCoordinate) {
 function drawMap() {
   
   clear()
+
   let coordinates = []
 
   for (var i = 0; i < currentData.length; i++) {
@@ -267,8 +300,6 @@ function drawMap() {
   myMap.map.scrollZoom.disable();
   myMap.map.doubleClickZoom.disable();
   myMap.map.touchZoomRotate.disable();
-  myMap.map.touchPitch.disable();
-
 
   if(coordinates.length % 2 == 0) {
     updateBearing(coordinates, previousCoordinate, latestCoordinate)
@@ -293,7 +324,6 @@ function drawMap() {
   } 
   else if (coordinates.length % 5 == 0) {
     myMap.map.jumpTo({ 'center' : latestCoordinate, 'zoom' : '6' });
-    // myMap.map.setStyle('mapbox://styles/mapbox/satellite-v9');
     // console.log("switching!", "zoom to default!")
     }
 
@@ -328,7 +358,7 @@ async function listenForNewPoints() {
 
 window.setInterval( function() {
   listenForNewPoints()     
-}, 500)
+}, 1000)
   
 
 

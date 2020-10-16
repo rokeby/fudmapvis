@@ -27,7 +27,7 @@ async function getMarket () {
 
 	$("#buy-list").html('')
 
-	$("#price-value").html(market.price)
+	$("#price-value").html(market.price.toFixed(2))
 
 	bidList.forEach(bid => $("#buy-list").append('$' + bid.toFixed(2) + '<br>'))
 }
