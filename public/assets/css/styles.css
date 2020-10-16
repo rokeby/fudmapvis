@@ -143,14 +143,14 @@ span {
 	width: 30vw;
 }
 
-#emailMessage {
-  color: #FFFFFF;
-  font: 13px Courier, sans-serif;
-  padding: 10px;
-  text-align: center;
+	#emailMessage {
+	color: #FFFFFF;
+	font: 13px Courier, sans-serif;
+	padding: 10px;
+	text-align: center;
 	border: 1px white solid;
 	margin-bottom: 5px;
-}
+	}
 
 	#emailForm {
 		display: flex;
@@ -220,28 +220,33 @@ span {
 .mapboxgl-ctrl-bottom-right {
 	display: none !important;
 }
-
+/*
 #mapvis, #mapvis * {
 	overflow: hidden !important;
 }
 
 body {
 	overflow: hidden !important;
-}
+}*/
 
 #showMarket {
 	display: none;
 }
 
+
+/*MMMMMMMMMobile*/
+
+
 @media screen and (max-width: 600px) {
 
 	#interface {
-		display: flex;
+		display: none;
 		flex-flow: column;
 		justify-content: center;
 	}
 
 	#chatContainer{
+		display: none;
 		position: absolute;
 		left: 8vw;
 		right: 8vw;
@@ -369,10 +374,12 @@ body {
 
 
 	#show {
+		display: none;
 		  font: 16px Courier, sans-serif;
 	}
 
 	#hide {
+		display: none;
 		  font: 16px Courier, sans-serif;
 	}
 
