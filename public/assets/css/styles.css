@@ -372,16 +372,8 @@ body {
 		margin-bottom: 5px;
 	}
 
-
-	#show {
+	#consoleData, #show, #hide, #email, #chatContainer, #interface {
 		display: none;
-		  font: 16px Courier, sans-serif;
 	}
-
-	#hide {
-		display: none;
-		  font: 16px Courier, sans-serif;
-	}
-
 
 }
