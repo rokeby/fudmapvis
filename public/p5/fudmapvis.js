@@ -42,8 +42,20 @@ function preload() {
 
 function setup() {
 
+  // must make this into a separate function but for now.. 
+  var d = new Date(); // for now
+  var hours = d.getHours(); // => 9
+  var minutes = d.getMinutes(); // => 9
+  console.log("hours now", hours, "minutes now", minutes)
 
-  checkTime() 
+  var dayPart 
+
+   if ( hours > 4 && hours < 10 ) {
+      dayPart = 'dawn' } else if ( hours >= 10 && hours < 16) { 
+        dayPart = 'day' } else if ( hours >= 16 && hours < 21 ) {
+        dayPart = 'dusk' } else if (hours >= 21 || hours <= 3 ) {
+          dayPart = 'night' }
+
 
   var canvas = createCanvas(windowWidth, windowHeight);
   canvas.style('display', 'block');
@@ -76,7 +88,7 @@ function setup() {
     zoom: zoom,
     studio: true, // false to use non studio styles
     // style: 'mapbox://styles/rokeby/ckfvgjjsy6vkw19mkij8g9v3c',
-    style: 'mapbox://styles/rokeby/ckgbjx2nd0qpj19k5b6tgl69l',
+    style: mapStyles[dayPart],
     pitch: pitch,
     bearing: bearing,
     worldCopyJump: false,
@@ -94,26 +106,22 @@ function windowResized() {
   resizeCanvas(windowWidth, windowHeight);
 }
 
-function checkTime() {
-  var d = new Date(); // for now
-  var hours = d.getHours(); // => 9
-  var minutes = d.getMinutes(); // => 9
-  console.log("hours now", hours, "minutes now", minutes)
+// function checkTime() {
+//   var d = new Date(); // for now
+//   var hours = d.getHours(); // => 9
+//   var minutes = d.getMinutes(); // => 9
+//   console.log("hours now", hours, "minutes now", minutes)
 
-  
+//   var dayPart 
 
-  // currentStyle = myMap.map.getStyle();
+//    if ( hours > 4 && hours < 10 ) {
+//       dayPart = 'dawn' } else if ( hours >= 10 && hours < 16) { 
+//         dayPart = 'day' } else if ( hours >= 16 && hours < 21 ) {
+//         dayPart = 'dusk' } else if (hours >= 21 || hours <= 3 ) {
+//           dayPart = 'night' }
 
-  // if (hours > 7 && currentStyle != 'mapbox://styles/rokeby/ckfvgjjsy6vkw19mkij8g9v3c') {
-  //   myMap.map.setStyle('mapbox://styles/rokeby/ckgbjx2nd0qpj19k5b6tgl69l');
-  //   console.log("setting up morning!")
-  // } 
-
-  // else if (hours <= 7 ) {
-  //   // myMap.map.setStyle('mapbox://styles/rokeby/ckfvgjjsy6vkw19mkij8g9v3c');
-  //   console.log("setting up night time!")
-  // }
-}
+//   console.log("the dayPart now is ", dayPart)
+// }
 
 function bearingBetween(coordinate1, coordinate2) {
   var point1 = {
