@@ -137,8 +137,8 @@ span {
 #consoleData {
 	visibility: visible;	
 	position: fixed;
-	top: 2px;
-	left: 3px;
+	top: 5px;
+	left: 6px;
 	color: #FFFFFF;
 	font: 13px Courier, sans-serif;
 	cursor: help;
@@ -146,8 +146,8 @@ span {
 #back {
 	position: fixed;
 	display: none;
-	top: 2px;
-	left: 3px;
+	top: 5px;
+	left: 6px;
 	color: #FFFFFF;
 	font: 13px Courier, sans-serif;
 	cursor: help;
@@ -179,8 +179,8 @@ span {
 }
 #hide {
 	position: fixed;
-	right: 3px;
-	top: 2px;
+	top: 5px;
+	right: 6px;
 	color: #FFFFFF;
 	font: 13px Courier, sans-serif;
 	text-align: center;
@@ -189,8 +189,8 @@ span {
 #show {
 	position: fixed;
 	display: none;
-	right: 3px;
-	top: 2px;
+	top: 5px;
+	right: 6px;
 	color: #FFFFFF;
 	font: 13px Courier, sans-serif;
 	text-align: left;
@@ -209,7 +209,9 @@ body {
 #showMarket {
 	display: none;
 }
-/*MMMMMMMMMobile*/
+
+/*************************Mobile**************************/
+
 @media screen and (max-width: 800px) {
 	body {
 		overflow: hidden;
