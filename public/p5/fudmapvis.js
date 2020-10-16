@@ -253,7 +253,7 @@ function drawProperties() {
     }
 
     // $("#consoleData").html("current storm is a " + verboseStatus.toLowerCase() + " at " + windspeed + " knots...").css({ "display" : "block"})
-    $("#consoleData").html("v0.3")
+    $("#consoleData").html("login")
 
 }
 
@@ -325,17 +325,17 @@ function drawMap() {
   } 
   else if (coordinates.length % 3 == 0) {
     myMap.map.setBearing(0)
-    myMap.map.jumpTo({ 'center' : latestCoordinate, 'zoom' : '4' });
+    myMap.map.jumpTo({ 'center' : latestCoordinate, 'zoom' : '6' });
       // console.log("zoom to 4!")
   } 
   else if (coordinates.length % 4 == 0) {
     myMap.map.setBearing(180)
     myMap.map.setPitch(0)
-      myMap.map.jumpTo({ 'center' : latestCoordinate, 'zoom' : '10' });
+      myMap.map.jumpTo({ 'center' : latestCoordinate, 'zoom' : '4' });
     // console.log("switching!", "zoom to 2!")
   } 
   else if (coordinates.length % 5 == 0) {
-    myMap.map.jumpTo({ 'center' : latestCoordinate, 'zoom' : '6' });
+    myMap.map.jumpTo({ 'center' : latestCoordinate, 'zoom' : '10' });
     // console.log("switching!", "zoom to default!")
     }
 
