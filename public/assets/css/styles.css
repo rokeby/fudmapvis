@@ -62,8 +62,8 @@ a.mapboxgl-ctrl-logo {
 		visibility: visible;
 		flex-flow: column;
 		justify-content: flex-end;
-		left: 50px;
-		bottom: 120px;
+		left: 6vh;
+		bottom: 6vh;
 		padding: 10px;
 		font: 13px Courier, sans-serif;
 		color: white;
@@ -72,12 +72,12 @@ a.mapboxgl-ctrl-logo {
 		margin-bottom: 5px;
 	}
 
-	#chatLine * {
+	.chatLine * {
 	  word-break: break-all;
 	  width: inherit;
 	}
 
-	#chatEntity {
+	.chatEntity {
 	  width: inherit;
 	  word-break: break-all;
 	}
@@ -92,7 +92,7 @@ a.mapboxgl-ctrl-logo {
 
 	#userChat {
 		display: flex;
-		flex-flow: row wrap;
+		flex-flow: row nowrap;
 		justify-content: space-between;
 	}
 
@@ -219,13 +219,155 @@ a.mapboxgl-ctrl-logo {
 
 @media screen and (max-width: 600px) {
 
+	#interface {
+		display: flex;
+		flex-flow: column;
+		justify-content: center;
+	}
+
 	#chatContainer{
+		position: fixed;
+		left: 8vw;
+		right: 8vw;
+		max-height: 90vh;
+		bottom: 6vh;
+		z-index: 1;
+		width: 84vw;
+	}
+
+	#chat {
+		display: flex;
+		visibility: visible;
+		flex-flow: column;
+		justify-content: flex-end;
+		bottom: 6vh;
+		padding: 5px;
+		font: 13px Courier, sans-serif;
+		color: white;
+		z-index: 1;
+		border: 1px white solid;
+		margin-bottom: 5px;
+	}
+
+	#userChat > input[type=text] {
+	  border: 1px solid white;
+	  border-radius: 0px;
+	  background-color: transparent;
+	  color: white;
+	  padding: 3px;
+	  font: 13px Courier, sans-serif;
+	  outline: none;
+	}
+
+	#username {
+		width: 20vw;
+		border: 1px white solid;
+	}
+
+	#userMessage {
+		width: 42vw;
+	}
+
+	#userChat > input[type=submit] {
+		width: 15vw;
+		border: 1px white solid;
+		color: white;
+		background-color: transparent;
+	}
+
+	#email {
+	display: flex;
+	display: none;
+	flex-flow: column;
 	position: fixed;
-	bottom: 6vh;
-	left: 6vh;
-	z-index: 1;
-	width: 80vw;
-}
+	left: 8vw;
+	right: 8vw;
+	width: 84vw;
+	}
+
+	#emailMessage {
+	color: #FFFFFF;
+	font: 13px Courier, sans-serif;
+	padding: 10px;
+	text-align: left;
+	border: 1px white solid;
+	margin-bottom: 5px;
+	}
+
+	#emailForm {
+		display: flex;
+		flex-flow: row nowrap;
+		justify-content: space-between;
+	}
+
+	#emailForm > input[type=text] {
+	  border: 1px solid white;
+	  border-radius: 0px;
+	  background-color: transparent;
+	  color: white;
+	  padding: 3px;
+	  font: 13px Courier, sans-serif;
+	  outline: none;
+	}
+
+	#emailInput {
+		width: 65vw;
+		border: 1px white solid;
+		margin-right: 0px;
+	}
+
+	#emailForm > input[type=submit] {
+		width: 15vw;
+		border: 1px white solid;
+		color: white;
+		background-color: transparent;
+	}
+
+	#emailForm > input[type=submit]:hover {
+		background-color: transparent;
+		color: red;
+		cursor: crosshair !important;
+	}
+
+	#showMarket {
+		display: block;
+		position: fixed;
+		bottom: 2px;
+		right: 3px;
+		color: white;
+		font: 16px Courier, sans-serif;
+	}
+
+	#market {
+		display: none;
+		position: fixed;
+		flex-flow: column;
+		right: 8vw;
+		left: 8vw;
+		z-index: 1;
+		color: white;
+		font: 13px Courier, sans-serif;
+		width: 80vw;
+	}
+
+	#buy, #price {
+		border: 1px white solid;
+		padding: 5px;
+		width: 80vw;
+	}
+
+	#buy {
+		margin-bottom: 5px;
+	}
+
+
+	#show {
+		  font: 16px Courier, sans-serif;
+	}
+
+	#hide {
+		  font: 16px Courier, sans-serif;
+	}
 
 
 }

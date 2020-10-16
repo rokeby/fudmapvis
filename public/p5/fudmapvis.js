@@ -5,7 +5,7 @@ let myMap;
 let canvas;
 let hurricanes;
 const geoJSONlatlong = []
-const zoom = 6
+const zoom = 8
 let preJSON
 let array = []
 let latlong = []
@@ -217,7 +217,7 @@ function drawCanvas(startPoint, endPoint) {
         y1 = latlong.y
         y2 = prevlatlong.y
 
-        // drawYellowLine(x1, y1, x2, y2);
+        drawYellowLine(x1, y1, x2, y2);
         stroke(0, 0, 255);
         drawDots(j, x1,y1)
 

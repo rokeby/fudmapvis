@@ -14,3 +14,8 @@ $("#show").click( function() {
 	$("#hide").toggle()
 	$("#show").toggle()
 }) 
+
+$("#showMarket").click( function() {
+	$("#market").toggle()
+	$("#chatContainer").toggle()
+}) 
