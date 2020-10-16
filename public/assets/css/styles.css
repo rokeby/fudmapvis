@@ -205,6 +205,12 @@ span {
 	body {
 		overflow: hidden;
 	}
+
+	#mapvis {
+		bottom: 0;
+		position: absolute;
+	}
+
 	#interface {
 		flex-flow: column;
 		justify-content: center;
