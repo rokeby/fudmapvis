@@ -320,4 +320,12 @@ span {
 	#consoleData, #show, #hide, #email, #market {
 		display: none;
 	}
+
+	input[type="text"],
+	input[type="message"],
+	input[type="submit"],
+	select:focus,
+	textarea {
+		font-size: 16px;
+	}
 }
