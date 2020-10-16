@@ -313,6 +313,7 @@ function drawMap() {
   } 
   else if (coordinates.length == 1)  {
     updateBearing(coordinates, previousCoordinate, latestCoordinate)
+    myMap.map.setPitch(30)
     myMap.map.jumpTo({ 'center' : latestCoordinate });
       // console.log("switching!", coordinates.length)
   } 
@@ -328,6 +329,7 @@ function drawMap() {
     // console.log("switching!", "zoom to 2!")
   } 
   else if (coordinates.length % 5 == 0) {
+    myMap.map.setPitch(60)
     myMap.map.jumpTo({ 'center' : latestCoordinate, 'zoom' : '8' });
     // console.log("switching!", "zoom to default!")
     }
