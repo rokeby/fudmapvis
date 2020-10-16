@@ -215,7 +215,7 @@ span {
 		justify-content: center;
 	}
 	#chatContainer{
-		position: absolute;
+		position: fixed;
 		left: 8vw;
 		right: 8vw;
 		max-height: 90vh;
@@ -225,6 +225,7 @@ span {
 	}
 	#chat {
 		display: flex;
+		position: absolute;
 		visibility: visible;
 		flex-flow: column;
 		justify-content: flex-end;
@@ -236,13 +237,15 @@ span {
 		border: none;
 		margin-bottom: 5px;
 	}
+
 	#userChat > input[type=text] {
-		border: 1px solid white;
+		position: absolute;
 		border-radius: 0px;
 		background-color: transparent;
 		color: white;
 		padding: 3px;
 		font: 13px Courier, sans-serif;
+		border: 1px solid white;
 		outline: none;
 	}
 	#username {
