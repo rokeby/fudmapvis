@@ -335,7 +335,7 @@ function drawMap() {
     // console.log("switching!", "zoom to 2!")
   } 
   else if (coordinates.length % 5 == 0) {
-    myMap.map.jumpTo({ 'center' : latestCoordinate, 'zoom' : '10' });
+    myMap.map.jumpTo({ 'center' : latestCoordinate, 'zoom' : '2' });
     // console.log("switching!", "zoom to default!")
     }
 

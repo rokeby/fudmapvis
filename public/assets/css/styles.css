@@ -239,10 +239,13 @@ span {
 		justify-content: flex-end;
 		bottom: 6vh;
 		padding: 5px;
+		max-height: 80vh;
 		font: 13px Courier, sans-serif;
 		color: white;
 		border: none;
 		margin-bottom: 5px;
+		overflow: hidden;
+		border: 1px white solid;
 	}
 
 	#userChat > input[type=text] {
@@ -331,8 +334,12 @@ span {
 	#buy {
 		margin-bottom: 5px;
 	}
-	#consoleData, #show, #hide, #email, #market, #userchat {
+	#consoleData, #email, #market, #userChat {
 		display: none;
+	}
+
+	#show, #hide {
+		font-size: 20px;
 	}
 
 }
