@@ -100,6 +100,7 @@ span {
 	width: 4vw;
 	border: 1px white solid;
 	color: white;
+	font-size: 11px;
 	background-color: transparent;
 }
 #userChat > input[type=submit]:hover {
@@ -120,7 +121,7 @@ span {
 	color: #FFFFFF;
 	font: 13px Courier, sans-serif;
 	padding: 10px;
-	text-align: center;
+	text-align: left;
 	border: 1px white solid;
 	margin-bottom: 5px;
 }
@@ -340,7 +341,7 @@ span {
   select,
   textarea,
   input {
-    font-size: 16px;
+    font-size: 13px;
   }
 }
 
@@ -348,7 +349,7 @@ span {
   select:focus,
   textarea:focus,
   input:focus {
-    font-size: 16px;
+    font-size: 13px;
   }
 }
 

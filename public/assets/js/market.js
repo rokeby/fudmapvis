@@ -35,6 +35,6 @@ async function getMarket () {
 //set market to run every 1s
 window.setInterval(function(){
 	getMarket();
-}, 1000)
+}, 2000)
 
 // body has already been consumed
