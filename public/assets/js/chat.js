@@ -1,9 +1,9 @@
 var dict = {
-	agent : "pink",
-	weather : "lightblue",
+	agent : "MistyRose",
+	weather : "#b2ebff",
 	market : "yellow",
 	oracle: "gold",
-	person: "#00FF00",
+	person: "PaleGreen",
 }
 
 async function getChat () {

@@ -50,7 +50,7 @@ function setup() {
 
   var dayPart 
 
-   if ( hours > 4 && hours < 10 ) {
+   if ( hours > 3 && hours < 10 ) {
       dayPart = 'dawn' } else if ( hours >= 10 && hours < 16) { 
         dayPart = 'day' } else if ( hours >= 16 && hours < 21 ) {
         dayPart = 'dusk' } else if (hours >= 21 || hours <= 3 ) {
@@ -88,7 +88,7 @@ function setup() {
     zoom: zoom,
     studio: true, // false to use non studio styles
     // style: 'mapbox://styles/rokeby/ckfvgjjsy6vkw19mkij8g9v3c',
-    style: mapStyles[dayPart],
+    style: "mapbox://styles/rokeby/ckfvgjjsy6vkw19mkij8g9v3c",
     pitch: pitch,
     bearing: bearing,
     worldCopyJump: false,
@@ -228,12 +228,11 @@ function drawCanvas(startPoint, endPoint) {
     }
 }
 
-function drawProximate() {
+function drawProperties() {
   // console.log(currentData)
 
   let hurricaneProperties = currentData[currentData.length - 1].properties
 
-  let proximateCountry = hurricaneProperties.proximity.country
   let landfall = hurricaneProperties.landfall
   let verboseStatus = hurricaneProperties.report
   let riskValue = hurricaneProperties.risk
@@ -241,16 +240,20 @@ function drawProximate() {
   let highestRisk = hurricaneProperties.highest_risk
 
   if (hurricaneProperties.proximity[0] != undefined) {
+    let proximateCountry = hurricaneProperties.proximity.country
     let proxLat = hurricaneProperties.proximity[0].lat
     let proxLng = hurricaneProperties.proximity[0].lon
     let proxPlaceName = hurricaneProperties.proximity[0].name
 
     const proxLatLongPixel = myMap.latLngToPixel(proxLat, proxLng)
-    console.log("there is a proximity to", proxPlaceName, "at", proxLatLongPixel)  
+    // console.log("there is a proximity to", proxPlaceName, "at", proxLatLongPixel)  
     stroke(255,215,0)
     fill(255,215,0)
     triangle(proxLatLongPixel.x + 5, proxLatLongPixel.y, proxLatLongPixel.x - 5, proxLatLongPixel.y, proxLatLongPixel.x, proxLatLongPixel.y + 5)
     }
+
+    // $("#consoleData").html("current storm is a " + verboseStatus.toLowerCase() + " at " + windspeed + " knots...").css({ "display" : "block"})
+    $("#consoleData").html("v0.3")
 
 }
 
@@ -285,6 +288,7 @@ function drawTrack(coordinates, previousCoordinate, latestCoordinate) {
   if(coordinates.length > 2) {
     drawCanvas(previousCoordinate, latestCoordinate)
   }
+
 }
 
 function drawMap() {
@@ -336,7 +340,7 @@ function drawMap() {
     }
 
   drawTrack(coordinates, previousCoordinate, latestCoordinate)
-  drawProximate()
+  drawProperties()
 
 }
 
@@ -366,7 +370,7 @@ async function listenForNewPoints() {
 
 window.setInterval( function() {
   listenForNewPoints()     
-}, 1000)
+}, 600)
   
 
 

@@ -37,5 +37,4 @@ window.setInterval(function(){
 	getMarket();
 }, 1000)
 
-
 // body has already been consumed

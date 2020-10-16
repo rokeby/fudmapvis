@@ -20,50 +20,68 @@
     <div id="mapvis">
     </div>
 
-    <div id="market">
-      <div id="buy">
-        <div id="buy-header">
-          latest bids<br>
-          ----------
+    <div id="interface">
+
+      <div id="market">
+        <div id="buy">
+          <div id="buy-header">
+            latest bids<br>
+            ----------
+          </div>
+          <div id="buy-list">
+            waiting for bids...
+          </div>
         </div>
-        <div id="buy-list">
-          waiting for bids...
+        <div id="price">
+          <div id="price-header">
+            avg. price <br>
+            ----------
+          </div>
+          <div id="price-value">
+          </div>
         </div>
       </div>
-      <div id="price">
-        <div id="price-header">
-          avg. price <br>
-          ----------
-        </div>
-        <div id="price-value">
-        </div>
-      </div>
-    </div>
 
-    <div id="chatContainer">
+      <div id="chatContainer">
 
-      <div id="chat">
+        <div id="chat">
+        </div>
+        
+        <div id="chatForm">
+          <form id="userChat">
+            <input id="username" type="text" name="user" placeholder ="username"><br>
+            <input id="userMessage" type="text" name="chat_string" placeholder ="message"><br>
+            <input type="submit" value="send">
+          </form>
+        </div>
+
       </div>
       
-      <div id="chatForm">
-        <form id="userChat">
-          <input id="username" type="text" name="user" placeholder ="username"><br>
-          <input id="userMessage" type="text" name="chat_string" placeholder ="message"><br>
-          <input type="submit" value="send">
+      <div id="email">
+        <div id="emailMessage">
+          16.10.20 - after the busiest hurricane season on record, fud.global is temporarily closed to new traders. early trading for next season's simulation will begin later this year. for access, please submit your email below. 
+        </div>
+        <form id="emailForm">
+          <input id="emailInput" type="text" name="email" placeholder ="trader@fud.global">
+          <input id="emailSubmit" type="submit" value="submit email">
         </form>
       </div>
 
+      <div id='consoleData'>
+      </div>
     </div>
-    
-    <div id="email">
-      <form id="emailForm">
-        <input type="text" name="email" placeholder ="trader@fud.global"><br>
-        <input type="submit" value="submit email">
-      </form>
+    <div id="hide">
+      x
     </div>
+    <div id="show">
+      +
+    </div>
+  </div>
+
 </body>
 
 <script src="p5/fudmapvis.js"></script>
 <script src="assets/js/chat.js"></script>
+<script src="assets/js/misc.js"></script>
 <script src="assets/js/market.js"></script>
 </html>

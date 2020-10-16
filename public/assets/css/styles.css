@@ -34,7 +34,7 @@ a.mapboxgl-ctrl-logo {
 	top: 6vh;
 	z-index: 1;
 	color: white;
-	font: 14px Courier, sans-serif;
+	font: 13px Courier, sans-serif;
 	max-width: 30vw;
 }
 
@@ -59,12 +59,13 @@ a.mapboxgl-ctrl-logo {
 
 	#chat {
 		display: flex;
+		visibility: visible;
 		flex-flow: column;
 		justify-content: flex-end;
 		left: 50px;
 		bottom: 120px;
 		padding: 10px;
-		font: 14px Courier, sans-serif;
+		font: 13px Courier, sans-serif;
 		color: white;
 		z-index: 1;
 		border: 1px white solid;
@@ -101,7 +102,7 @@ a.mapboxgl-ctrl-logo {
 	  background-color: transparent;
 	  color: white;
 	  padding: 3px;
-	  font: 14px Courier, sans-serif;
+	  font: 13px Courier, sans-serif;
 	  outline: none;
 	}
 
@@ -129,15 +130,88 @@ a.mapboxgl-ctrl-logo {
 	}
 
 #email {
+	display: flex;
+	display: none;
+	flex-flow: column;
 	position: fixed;
-	top: 50px;
-	left: 50px;
+	top: 6vh;
+	left: 6vh;
+	width: 30vw;
 }
 
-#emailForm {
-
+#emailMessage {
+  color: #FFFFFF;
+  font: 13px Courier, sans-serif;
+  padding: 10px;
+  text-align: center;
+	border: 1px white solid;
+	margin-bottom: 5px;
 }
 
+	#emailForm {
+		display: flex;
+		flex-flow: row wrap;
+		justify-content: space-between;
+	}
+
+	#consoleData {
+		position: fixed;
+		top: 2px;
+		left: 3px;
+	  color: #FFFFFF;
+	  font: 13px Courier, sans-serif;
+	  cursor: help;
+	}
+
+	#emailForm > input[type=text] {
+	  border: 1px solid white;
+	  border-radius: 0px;
+	  background-color: transparent;
+	  color: white;
+	  padding: 3px;
+	  font: 13px Courier, sans-serif;
+	  outline: none;
+	}
+
+	#emailInput {
+		width: 23vw;
+		border: 1px white solid;
+		margin-right: 0px;
+	}
+
+	#emailForm > input[type=submit] {
+		width: 6vw;
+		border: 1px white solid;
+		color: white;
+		background-color: transparent;
+	}
+
+	#emailForm > input[type=submit]:hover {
+		background-color: transparent;
+		color: red;
+		cursor: crosshair !important;
+	}
+
+#hide {
+	position: fixed;
+	right: 3px;
+	top: 2px;
+	color: #FFFFFF;
+	font: 13px Courier, sans-serif;
+	text-align: center;
+	cursor: help;
+}
+
+#show {
+	position: fixed;
+	display: none;
+	right: 3px;
+	top: 2px;
+	color: #FFFFFF;
+	font: 13px Courier, sans-serif;
+	text-align: left;
+	cursor: help;
+}
 
 .mapboxgl-ctrl-bottom-right {
 	display: none !important;
