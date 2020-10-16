@@ -25,7 +25,11 @@ async function getMarket () {
 	// console.log('bid list is', bidList)
 	// console.log(market)
 
-	$("#buy-list").html('')
+	if (market.bid_list[0].price != undefined ) {
+		$("#buy-list").html('')
+	}
+
+	$("#price-value").html(market.price)
 
 	bidList.forEach(bid => $("#buy-list").append('$' + bid.toFixed(2) + '<br>'))
 }

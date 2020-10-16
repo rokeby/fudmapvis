@@ -86,6 +86,9 @@ function initiateHurricane () {
         myMap.map.setPitch(50);
         myMap.map.dragPan.disable();
         myMap.map.scrollZoom.disable();
+        myMap.map.doubleClickZoom.disable();
+        myMap.map.touchZoomRotate.disable();
+        myMap.map.touchPitch.disable();
         console.log( "initializing on", data[0].geometry.coordinates);
          
         // on a regular basis, add more coordinates from the saved list and update the map

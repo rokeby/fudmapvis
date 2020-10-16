@@ -108,7 +108,7 @@ function drawLine(x1, x2, y1, y2) {
 function drawBlueLine(x1, x2,y1,y2) {
   line(x1, x2,y1,y2);
   colorMode(RGB, 100);  
-  stroke("#00FF00");
+  stroke("#FFFFFF");
 }
 
 function drawYellowLine(x1, x2,y1,y2) {
@@ -184,6 +184,30 @@ function drawCanvas(startPoint, endPoint) {
     }
 }
 
+function drawProximate() {
+  // console.log(currentData)
+
+  let hurricaneProperties = currentData[currentData.length - 1].properties
+
+  let proximateCountry = hurricaneProperties.proximity.country
+  let proxLat = hurricaneProperties.proximity[0].lat
+  let proxLng = hurricaneProperties.proximity[0].lon
+  let proxPlaceName = hurricaneProperties.proximity[0].name
+  let landfall = hurricaneProperties.landfall
+  let verboseStatus = hurricaneProperties.report
+  let riskValue = hurricaneProperties.risk
+  let windspeed = hurricaneProperties.speed
+  let highestRisk = hurricaneProperties.highest_risk
+
+if (proxPlaceName != undefined) {
+  const proxLatLongPixel = myMap.latLngToPixel(proxLat, proxLng)
+  console.log("there is a proximity to", proxPlaceName, "at", proxLatLongPixel)  
+  triangle(proxLatLongPixel.x + 5, proxLatLongPixel.y, proxLatLongPixel.x - 5, proxLatLongPixel.y, proxLatLongPixel.x, proxLatLongPixel.y + 5)
+  stroke("#0000FF")
+}
+
+}
+
 function drawTrack(coordinates, previousCoordinate, latestCoordinate) {
 
   let pixelSnake = []
@@ -253,15 +277,17 @@ function drawMap() {
   else if (coordinates.length % 4 == 0) {
     myMap.map.setBearing(180)
     myMap.map.setPitch(0)
-      myMap.map.jumpTo({ 'center' : latestCoordinate, 'zoom' : '2' });
+      myMap.map.jumpTo({ 'center' : latestCoordinate, 'zoom' : '8' });
     // console.log("switching!", "zoom to 2!")
   } 
   else if (coordinates.length % 5 == 0) {
     myMap.map.jumpTo({ 'center' : latestCoordinate, 'zoom' : zoom });
+    // myMap.map.setStyle('mapbox://styles/mapbox/satellite-v9');
     // console.log("switching!", "zoom to default!")
     }
 
   drawTrack(coordinates, previousCoordinate, latestCoordinate)
+  drawProximate()
 
 }
 
