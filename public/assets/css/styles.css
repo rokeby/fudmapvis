@@ -29,7 +29,6 @@ span {
 	flex-flow: column;
 	right: 6vh;
 	top: 6vh;
-	z-index: 1;
 	color: white;
 	font: 13px Courier, sans-serif;
 	max-width: 30vw;
@@ -46,7 +45,6 @@ span {
 	position: fixed;
 	bottom: 6vh;
 	left: 6vh;
-	z-index: 1;
 	width: 30vw;
 }
 #chat {
@@ -54,12 +52,10 @@ span {
 	visibility: visible;
 	flex-flow: column;
 	justify-content: flex-end;
-	left: 6vh;
 	bottom: 6vh;
 	padding: 10px;
 	font: 13px Courier, sans-serif;
 	color: white;
-	z-index: 1;
 	border: 1px white solid;
 	margin-bottom: 5px;
 }
@@ -77,7 +73,6 @@ span {
 	display: flex;
 	flex-flow: column;
 	justify-content: space-around;
-	z-index: 1;
 }
 #userChat {
 	display: flex;
@@ -220,7 +215,6 @@ span {
 		right: 8vw;
 		max-height: 90vh;
 		bottom: 6vh;
-		z-index: 1;
 		width: 84vw;
 	}
 	#chat {
@@ -233,24 +227,23 @@ span {
 		padding: 5px;
 		font: 13px Courier, sans-serif;
 		color: white;
-		z-index: 1;
 		border: none;
 		margin-bottom: 5px;
 	}
 
 	#userChat > input[type=text] {
-		position: absolute;
+		border: 1px solid white;
 		border-radius: 0px;
 		background-color: transparent;
 		color: white;
 		padding: 3px;
 		font: 13px Courier, sans-serif;
-		border: 1px solid white;
 		outline: none;
 	}
 	#username {
 		width: 20vw;
 		border: 1px white solid;
+
 	}
 	#userMessage {
 		width: 42vw;
@@ -312,7 +305,6 @@ span {
 		flex-flow: column;
 		right: 8vw;
 		left: 8vw;
-		z-index: 1;
 		color: white;
 		font: 13px Courier, sans-serif;
 		width: 80vw;
