@@ -346,6 +346,7 @@ body {
 	}
 
 	#market {
+		display: none;
 		position: fixed;
 		flex-flow: column;
 		right: 8vw;
@@ -375,13 +376,5 @@ body {
 		  font: 16px Courier, sans-serif;
 	}
 
-	#showMarket {
-	    display: block;
-		position: fixed;
-		bottom: 2px;
-		right: 3px;
-		color: white;
-		font: 16px Courier, sans-serif;
-	}
 
 }
