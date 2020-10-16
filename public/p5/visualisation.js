@@ -246,28 +246,28 @@ function drawProperties() {
     fill(255,215,0)
     triangle(proxLatLongPixel.x + 5, proxLatLongPixel.y, proxLatLongPixel.x - 5, proxLatLongPixel.y, proxLatLongPixel.x, proxLatLongPixel.y + 5)
 
-    if (proxDistance < 400 && proxDistance > 200) {
-      $("#consoleData").html(proxPlaceName + ', ' + proxCountry.toUpperCase() + ' is only ' + proxDistance.toFixed(0) + 'km away...');
-      setTimeout(function() { 
-        setTimeout(function() {
-          $("#consoleData").html('');
-          }, 5000); 
-      }, 3000);
-    } else if (proxDistance <= 200 && proxDistance > 0) {
-      $("#consoleData").html('only' + proxDistance.toFixed(0) + "km from " + proxPlaceName + ', ' + proxCountry.toUpperCase() + '...');
-      setTimeout(function() { 
-        setTimeout(function() {
-          $("#consoleData").html('');
-          }, 5000);
-      }, 3000);
-    } else if (landfall == true) {
-      $("#consoleData").html('LANDFALL at ' + proxPlaceName + ', ' + proxCountry.toUpperCase() + '!');
-      setTimeout(function() { 
-        setTimeout(function() {
-          $("#consoleData").html('');
-          }, 5000); 
-      }, 3000);
-    }
+    // if (proxDistance < 400 && proxDistance > 200) {
+    //   $("#consoleData").html(proxPlaceName + ', ' + proxCountry.toUpperCase() + ' is only ' + proxDistance.toFixed(0) + 'km away...');
+    //   setTimeout(function() { 
+    //     setTimeout(function() {
+    //       $("#consoleData").html('');
+    //       }, 5000); 
+    //   }, 3000);
+    // } else if (proxDistance <= 200 && proxDistance > 0) {
+    //   $("#consoleData").html('only' + proxDistance.toFixed(0) + "km from " + proxPlaceName + ', ' + proxCountry.toUpperCase() + '...');
+    //   setTimeout(function() { 
+    //     setTimeout(function() {
+    //       $("#consoleData").html('');
+    //       }, 5000);
+    //   }, 3000);
+    // } else if (landfall == true) {
+    //   $("#consoleData").html('LANDFALL at ' + proxPlaceName + ', ' + proxCountry.toUpperCase() + '!');
+    //   setTimeout(function() { 
+    //     setTimeout(function() {
+    //       $("#consoleData").html('');
+    //       }, 5000); 
+    //   }, 3000);
+    // }
 
     }
 
@@ -367,9 +367,11 @@ function drawMap() {
 
 function newHurricane() {
   // console.log('time for a new hurricane')
-  setTimeout(function() {
-    $("#consoleData").html('a new storm has begun...');
-    }, 5000);
+
+  // setTimeout(function() {
+  //   $("#consoleData").html('a new storm has begun...');
+  //   }, 5000);
+
 }
 
 function newPoint() {
