@@ -242,6 +242,7 @@ body {
 	}
 
 	#chatContainer{
+		display: none;
 		position: fixed;
 		left: 8vw;
 		right: 8vw;
@@ -345,14 +346,7 @@ body {
 		cursor: crosshair !important;
 	}
 
-	#showMarket {
-		display: block;
-		position: fixed;
-		bottom: 2px;
-		right: 3px;
-		color: white;
-		font: 16px Courier, sans-serif;
-	}
+	
 
 	#market {
 		display: none;
@@ -379,11 +373,21 @@ body {
 
 	#show {
 		  font: 16px Courier, sans-serif;
+		  display: none
 	}
 
 	#hide {
 		  font: 16px Courier, sans-serif;
+		  display: none
 	}
 
+	#showMarket {
+		  display: none
+		position: fixed;
+		bottom: 2px;
+		right: 3px;
+		color: white;
+		font: 16px Courier, sans-serif;
+	}
 
 }
