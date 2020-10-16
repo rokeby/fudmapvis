@@ -216,3 +216,16 @@ a.mapboxgl-ctrl-logo {
 .mapboxgl-ctrl-bottom-right {
 	display: none !important;
 }
+
+@media screen and (max-width: 600px) {
+
+	#chatContainer{
+	position: fixed;
+	bottom: 6vh;
+	left: 6vh;
+	z-index: 1;
+	width: 80vw;
+}
+
+
+}

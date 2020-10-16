@@ -46,7 +46,7 @@ function setup() {
   var d = new Date(); // for now
   var hours = d.getHours(); // => 9
   var minutes = d.getMinutes(); // => 9
-  console.log("hours now", hours, "minutes now", minutes)
+  // console.log("hours now", hours, "minutes now", minutes)
 
   var dayPart 
 
@@ -73,7 +73,7 @@ function setup() {
 
   colorMode(RGB, 100);  
 
-  console.log("initial coords", initialData[initialData.length - 1].geometry.coordinates)
+  // console.log("initial coords", initialData[initialData.length - 1].geometry.coordinates)
 
   if (initialData.length > 2) { 
     bearing = bearingBetween(initialData[initialData.length - 2].geometry.coordinates, 
@@ -88,7 +88,7 @@ function setup() {
     zoom: zoom,
     studio: true, // false to use non studio styles
     // style: 'mapbox://styles/rokeby/ckfvgjjsy6vkw19mkij8g9v3c',
-    style: "mapbox://styles/rokeby/ckfvgjjsy6vkw19mkij8g9v3c",
+    style: mapStyles[dayPart],
     pitch: pitch,
     bearing: bearing,
     worldCopyJump: false,
@@ -345,7 +345,7 @@ function drawMap() {
 }
 
 function newHurricane() {
-  console.log('time for a new hurricane')
+  // console.log('time for a new hurricane')
 }
 
 function newPoint() {

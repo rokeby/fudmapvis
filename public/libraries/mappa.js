@@ -651,7 +651,7 @@ var Mappa = function () {
   return Mappa;
 }();
 
-console.log('Mappa loaded!');
+// console.log('Mappa loaded!');
 module.exports = Mappa;
 
 /***/ }),
