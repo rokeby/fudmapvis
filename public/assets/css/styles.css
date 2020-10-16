@@ -219,6 +219,10 @@ a.mapboxgl-ctrl-logo {
 
 @media screen and (max-width: 600px) {
 
+	#mapvis, #mapvis * {
+		overflow: hidden;
+	}
+
 	#interface {
 		display: flex;
 		flex-flow: column;
