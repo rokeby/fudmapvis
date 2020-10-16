@@ -12,7 +12,7 @@ async function getChat () {
 	const chat = await response.json();
 	$("#chat").html('')
 	chat.forEach(msg => $("#chat").append(
-		'<div class="chatLine"><span class="chatEntity" style="color: ' + dict[msg.entityType]+ '">' + msg.agent + ': </span><span class="chatEntity" style="color: ' + dict[msg.entityType] + '">' + msg.chat + '</span></div><br>'))
+		'<div class="chatLine"><span class="chatEntity" style="color: ' + dict[msg.entityType]+ '">' + msg.agent + ': </span><span class="chatEntity" style="color: ' + dict[msg.entityType] + '">' + msg.chat + '</span></div>'))
 
 	// console.log($("#chat").text().length)
 }
