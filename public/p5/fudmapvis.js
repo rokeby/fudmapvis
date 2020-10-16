@@ -5,7 +5,7 @@ let myMap;
 let canvas;
 let hurricanes;
 const geoJSONlatlong = []
-const zoom = 8
+const zoom = 3
 let preJSON
 let array = []
 let latlong = []
@@ -308,10 +308,10 @@ function drawMap() {
 
   myMap.map.setPitch(pitch);
   // console.log( "centering on", latestCoordinate, "in an array of", coordinates.length, ", the last point was", previousCoordinate);
-  myMap.map.dragPan.disable();
-  myMap.map.scrollZoom.disable();
-  myMap.map.doubleClickZoom.disable();
-  myMap.map.touchZoomRotate.disable();
+  // myMap.map.dragPan.disable();
+  // myMap.map.scrollZoom.disable();
+  // myMap.map.doubleClickZoom.disable();
+  // myMap.map.touchZoomRotate.disable();
 
   if(coordinates.length % 2 == 0) {
     updateBearing(coordinates, previousCoordinate, latestCoordinate)
@@ -325,7 +325,7 @@ function drawMap() {
   } 
   else if (coordinates.length % 3 == 0) {
     myMap.map.setBearing(0)
-    myMap.map.jumpTo({ 'center' : latestCoordinate, 'zoom' : '6' });
+    myMap.map.jumpTo({ 'center' : latestCoordinate, 'zoom' : '5' });
       // console.log("zoom to 4!")
   } 
   else if (coordinates.length % 4 == 0) {

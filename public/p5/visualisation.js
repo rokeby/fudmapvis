@@ -3,7 +3,7 @@ const key = 'pk.eyJ1Ijoicm9rZWJ5IiwiYSI6ImNrZWViMjYzdDBqcjUzMm1sZ2IzdmxvdXMifQ.Z
 const mappa = new Mappa('MapboxGL', key);
 let myMap;
 let canvas;
-const zoom = 8
+const zoom = 3
 let preJSON
 let pitch = 50
 let mapStyles = {
@@ -319,7 +319,7 @@ function drawMap() {
   } 
   else if (coordinates.length % 3 == 0) {
     myMap.map.setBearing(0)
-    myMap.map.jumpTo({ 'center' : latestCoordinate, 'zoom' : '6' });
+    myMap.map.jumpTo({ 'center' : latestCoordinate, 'zoom' : '5' });
       // console.log("zoom to 4!")
   } 
   else if (coordinates.length % 4 == 0) {
@@ -330,7 +330,7 @@ function drawMap() {
   } 
   else if (coordinates.length % 5 == 0) {
     myMap.map.setPitch(60)
-    myMap.map.jumpTo({ 'center' : latestCoordinate, 'zoom' : '8' });
+    myMap.map.jumpTo({ 'center' : latestCoordinate, 'zoom' : '2' });
     // console.log("switching!", "zoom to default!")
     }
 
