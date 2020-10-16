@@ -331,7 +331,7 @@ span {
 	#buy {
 		margin-bottom: 5px;
 	}
-	#consoleData, #show, #hide, #email, #market, #interface {
+	#consoleData, #show, #hide, #email, #market, #userchat {
 		display: none;
 	}
 
