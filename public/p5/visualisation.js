@@ -1,4 +1,4 @@
-const key = 'pk.eyJ1Ijoicm9rZWJ5IiwiYSI6ImNrZWViMjYzdDBqcjUzMm1sZ2IzdmxvdXMifQ.ZQFCehPe0Z7IRpR3k6vlKQ';
+const key = 'pk.eyJ1IjoiemhleGk5MyIsImEiOiJja2dmandndHMxaG9lMnhxYWF0YjNocnViIn0.gqUbZeC9pipfWHIGXMuh2w';
 
 const mappa = new Mappa('MapboxGL', key);
 let myMap;
@@ -7,10 +7,10 @@ const zoom = 3
 let preJSON
 let pitch = 50
 let mapStyles = {
-  "dawn" : "mapbox://styles/rokeby/ckgbku2r52ar219qukmelh6dr",
-  "day" : "mapbox://styles/rokeby/ckgbl5cah1wkv19o2asy4tjb1",
-  "dusk" : "mapbox://styles/rokeby/ckfvgjjsy6vkw19mkij8g9v3c",
-  "night" : "mapbox://styles/rokeby/ckfvgjjsy6vkw19mkij8g9v3c",
+  "dawn" : "mapbox://styles/zhexi93/ckgfkc4973db419pas4k33ood",
+  "day" : "mapbox://styles/zhexi93/ckgfk878686qf19n56vwczhx1",
+  "dusk" : "mapbox://styles/zhexi93/ckgfk7lhw0ww519lkpfukn8pv",
+  "night" : "mapbox://styles/zhexi93/ckgfk7lhw0ww519lkpfukn8pv",
 }
 
 //things below this line we are using
@@ -254,7 +254,7 @@ function drawProperties() {
     //       }, 5000); 
     //   }, 3000);
     // } else if (proxDistance <= 200 && proxDistance > 0) {
-    //   $("#consoleData").html('only' + proxDistance.toFixed(0) + "km from " + proxPlaceName + ', ' + proxCountry.toUpperCase() + '...');
+    //   $("#consoleData").html('only ' + proxDistance.toFixed(0) + "km from " + proxPlaceName + ', ' + proxCountry.toUpperCase() + '...');
     //   setTimeout(function() { 
     //     setTimeout(function() {
     //       $("#consoleData").html('');
@@ -345,7 +345,7 @@ function drawMap() {
   } 
   else if (coordinates.length % 3 == 0) {
     myMap.map.setBearing(0)
-    myMap.map.jumpTo({ 'center' : latestCoordinate, 'zoom' : '2' });
+    myMap.map.jumpTo({ 'center' : latestCoordinate, 'zoom' : '7' });
       // console.log("zoom to 4!")
   } 
   else if (coordinates.length % 4 == 0) {
@@ -396,7 +396,6 @@ async function listenForNewPoints() {
 
 window.setInterval( function() {
   listenForNewPoints()     
-}, 600)
-  
+  }, 1000)
 
 
