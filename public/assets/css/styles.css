@@ -9,6 +9,9 @@ body {
 a.mapboxgl-ctrl-logo {
 	display: none !important;
 }
+.mapboxgl-ctrl-bottom-right {
+	display: none !important;
+}
 .main {
 	width: 100vw;
 	height: 100vh;
@@ -108,19 +111,19 @@ span {
 	color: red;
 	cursor: crosshair !important;
 }
-#email {
+#info {
 	display: flex;
 	display: none;
 	flex-flow: column;
 	position: fixed;
 	top: 6vh;
 	left: 6vh;
-	width: 30vw;
+	width: 45vw;
 }
-#emailMessage {
+#infoMessage {
 	color: #FFFFFF;
 	font: 13px Courier, sans-serif;
-	padding: 10px;
+	padding: 10px 10px 10px 10px;
 	text-align: left;
 	border: 1px white solid;
 	margin-bottom: 5px;
@@ -141,6 +144,7 @@ span {
 }
 #login {
 }
+
 #back {
 	position: fixed;
 	display: none;
@@ -160,12 +164,12 @@ span {
 	outline: none;
 }
 #emailInput {
-	width: 23vw;
+	width: 33vw;
 	border: 1px white solid;
 	margin-right: 0px;
 }
 #emailForm > input[type=submit] {
-	width: 6vw;
+	width: 9vw;
 	border: 1px white solid;
 	color: white;
 	background-color: transparent;
@@ -193,9 +197,6 @@ span {
 	font: 13px Courier, sans-serif;
 	text-align: left;
 	cursor: help;
-}
-.mapboxgl-ctrl-bottom-right {
-	display: none !important;
 }
 
 #showMarket {
@@ -273,7 +274,7 @@ span {
 		color: white;
 		background-color: transparent;
 	}
-	#email {
+	#info {
 		display: flex;
 		flex-flow: column;
 		position: fixed;
@@ -281,10 +282,10 @@ span {
 		right: 8vw;
 		width: 84vw;
 	}
-	#emailMessage {
+	#infoMessage {
 		color: #FFFFFF;
 		font: 13px Courier, sans-serif;
-		padding: 10px;
+		padding: 10px 10px 10px 10px;
 		text-align: left;
 		border: 1px white solid;
 		margin-bottom: 5px;

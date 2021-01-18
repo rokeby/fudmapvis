@@ -1,4 +1,4 @@
-const key = 'pk.eyJ1Ijoicm9rZWJ5IiwiYSI6ImNrZWViMjYzdDBqcjUzMm1sZ2IzdmxvdXMifQ.ZQFCehPe0Z7IRpR3k6vlKQ';
+const key = 'pk.eyJ1IjoiemhleGk5MyIsImEiOiJja2dmandndHMxaG9lMnhxYWF0YjNocnViIn0.gqUbZeC9pipfWHIGXMuh2w';
 
 const mappa = new Mappa('MapboxGL', key);
 let myMap;
@@ -13,10 +13,10 @@ let dim = 100
 let stage = 1
 let pitch = 50
 let mapStyles = {
-  "dawn" : "mapbox://styles/rokeby/ckgbku2r52ar219qukmelh6dr",
-  "day" : "mapbox://styles/rokeby/ckgbl5cah1wkv19o2asy4tjb1",
-  "dusk" : "mapbox://styles/rokeby/ckgbjx2nd0qpj19k5b6tgl69l",
-  "night" : "mapbox://styles/rokeby/ckfvgjjsy6vkw19mkij8g9v3c",
+  "dawn" : "mapbox://styles/zhexi93/ckgfkc4973db419pas4k33ood",
+  "day" : "mapbox://styles/zhexi93/ckgfkc4973db419pas4k33ood",
+  "dusk" : "mapbox://styles/zhexi93/ckgfkc4973db419pas4k33ood",
+  "night" : "mapbox://styles/zhexi93/ckk1soweu2snl17np46j1jqmx",
 }
 
 //things below this line we are using

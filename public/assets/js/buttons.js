@@ -1,5 +1,5 @@
 $("#login").click( function() {
-	$("#email").toggle()
+	$("#info").toggle()
 	$("#chatContainer").toggle()
 	$("#back").toggle()
 	$("#console").toggle()
@@ -9,7 +9,7 @@ $("#back").click( function() {
 	$("#console").toggle()
 	$("#chatContainer").toggle()
 	$("#back").toggle()
-	$("#email").toggle()	
+	$("#info").toggle()	
 })
 
 

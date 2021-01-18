@@ -1,4 +1,4 @@
-const key = 'pk.eyJ1IjoiemhleGk5MyIsImEiOiJja2dmandndHMxaG9lMnhxYWF0YjNocnViIn0.gqUbZeC9pipfWHIGXMuh2w';
+const key = 'pk.eyJ1Ijoicm9rZWJ5IiwiYSI6ImNrZWViMjYzdDBqcjUzMm1sZ2IzdmxvdXMifQ.ZQFCehPe0Z7IRpR3k6vlKQ';
 
 const mappa = new Mappa('MapboxGL', key);
 let myMap;
@@ -7,10 +7,10 @@ const zoom = 3
 let preJSON
 let pitch = 50
 let mapStyles = {
-  "dawn" : "mapbox://styles/zhexi93/ckgfkc4973db419pas4k33ood",
-  "day" : "mapbox://styles/zhexi93/ckgfk878686qf19n56vwczhx1",
-  "dusk" : "mapbox://styles/zhexi93/ckgfk7lhw0ww519lkpfukn8pv",
-  "night" : "mapbox://styles/zhexi93/ckgfk7lhw0ww519lkpfukn8pv",
+  "dawn" : "mapbox://styles/rokeby/ckk1t6qc01c5i17mzvcxt6wvy",
+  "day" : "mapbox://styles/rokeby/ckgbl5cah1wkv19o2asy4tjb1",
+  "dusk" : "mapbox://styles/rokeby/ckfvgjjsy6vkw19mkij8g9v3c",
+  "night" : "mapbox://styles/rokeby/ckfvgjjsy6vkw19mkij8g9v3c",
 }
 
 //things below this line we are using
