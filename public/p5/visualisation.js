@@ -272,7 +272,7 @@ function drawProperties() {
     }
 
     // $("#consoleData").html("current storm is a " + verboseStatus.toLowerCase() + " at " + windspeed + " knots...").css({ "display" : "block"})
-  $("#console #login").html("login")
+  $("#console #login").html("info")
 
 }
 
