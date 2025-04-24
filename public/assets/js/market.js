@@ -3,7 +3,7 @@ let askList = []
 
 async function getMarket () {
 
-	const response = await fetch('http://64.23.140.231/fud/market')
+	const response = await fetch('http://api.zhexi.info/fud/market')
 	const market = await response.json();
 
 	// $("#sell-list")

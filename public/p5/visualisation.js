@@ -33,7 +33,7 @@ let geojsonPoint = {
 };
 
 function preload() {
-  preJSON = loadJSON('http://64.23.140.231/fud/hurricane');
+  preJSON = loadJSON('http://api.zhexi.info/fud/hurricane');
 }
 
 function setup() {
@@ -381,7 +381,7 @@ function newPoint() {
 }
 
 async function listenForNewPoints() {
-  const res = await fetch('http://64.23.140.231/fud/hurricane')
+  const res = await fetch('http://api.zhexi.info/fud/hurricane')
   const data = await res.json()
 
   if(data !== currentData){
