@@ -134,14 +134,21 @@ span {
 	justify-content: space-between;
 }
 #console {
-	visibility: visible;	
+	visibility: visible;
 	position: fixed;
+	display: flex;
+	flex-flow: row nowrap;
 	top: 5px;
 	left: 6px;
 	color: #FFFFFF;
 	font: 13px Courier, sans-serif;
 	cursor: help;
 }
+
+#console * {
+	padding: 0 5px 0 5px;
+}
+
 #login {
 }
 
@@ -237,7 +244,7 @@ span {
 	#chat {
 		display: flex;
 		position: absolute;
-		visibility: visible;
+		visibility: hidden;
 		flex-flow: column;
 		justify-content: flex-end;
 		bottom: 6vh;
@@ -275,7 +282,7 @@ span {
 		background-color: transparent;
 	}
 	#info {
-		display: flex;
+		display: none;
 		flex-flow: column;
 		position: fixed;
 		left: 8vw;
@@ -337,7 +344,7 @@ span {
 	#buy {
 		margin-bottom: 5px;
 	}
-	#consoleData, #login, #email, #market, #userChat {
+	#consoleData, #email, #userChat {
 		display: none;
 	}
 

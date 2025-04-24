@@ -3,13 +3,17 @@ $("#login").click( function() {
 	$("#chatContainer").toggle()
 	$("#back").toggle()
 	$("#console").toggle()
+	$("#market").toggle()
+	$("#mapvis").toggle()
 })
 
 $("#back").click( function() {
 	$("#console").toggle()
 	$("#chatContainer").toggle()
 	$("#back").toggle()
-	$("#info").toggle()	
+	$("#info").toggle()
+	$("#market").toggle()
+	$("#mapvis").toggle()
 })
 
 
