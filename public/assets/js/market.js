@@ -3,7 +3,7 @@ let askList = []
 
 async function getMarket () {
 
-	const response = await fetch('https://server.fud.global/market')
+	const response = await fetch('http://64.23.140.231/fud/market')
 	const market = await response.json();
 
 	// $("#sell-list")
