@@ -1,380 +1,446 @@
+/* Global styles */
+:root {
+  --main-bg-color: black;
+  --main-text-color: white;
+  --accent-color: red;
+  --border-style: 1px solid white;
+  --main-font: 13px Courier, sans-serif;
+  --standard-padding: 10px;
+  --standard-margin: 5px;
+  --container-spacing: 6vh;
+  --mobile-container-spacing: 8vw;
+}
+
 body {
-	padding: 0;
-	margin: 0;
-	background-color: black;
+  padding: 0;
+  margin: 0;
+  background-color: var(--main-bg-color);
 }
+
+/* Map related styles */
 .mapboxgl-canvas-container *, .mapboxgl-ctrl-nav-compass {
-	cursor: crosshair !important;
+  cursor: crosshair !important;
 }
-a.mapboxgl-ctrl-logo {
-	display: none !important;
-}
+
+a.mapboxgl-ctrl-logo,
 .mapboxgl-ctrl-bottom-right {
-	display: none !important;
+  display: none !important;
 }
+
+/* Main layout styles */
 .main {
-	width: 100vw;
-	height: 100vh;
+  width: 100vw;
+  height: 100vh;
 }
+
 span {
-	line-height: 1.0;
+  line-height: 1.0;
 }
+
+/* Map container styles */
 #mapvis {
-	width: inherit;
+  width: inherit;
 }
+
 #mapvis > .mapboxgl-map {
-	width: 100%;
-	height: 100%;
+  width: 100%;
+  height: 100%;
 }
+
+/* Market display styles */
 #market {
-	position: fixed;
-	display: flex;
-	flex-flow: column;
-	right: 6vh;
-	top: 6vh;
-	color: white;
-	font: 13px Courier, sans-serif;
-	max-width: 30vw;
+  position: fixed;
+  display: flex;
+  flex-flow: column;
+  right: var(--container-spacing);
+  top: var(--container-spacing);
+  color: var(--main-text-color);
+  font: var(--main-font);
+  max-width: 30vw;
 }
+
 #buy, #price {
-	border: 1px white solid;
-	padding: 10px;
-	width: 10vw;
+  border: var(--border-style);
+  padding: var(--standard-padding);
+  width: 10vw;
 }
+
 #buy {
-	margin-bottom: 5px;
+  margin-bottom: var(--standard-margin);
 }
-#chatContainer{
-	position: fixed;
-	bottom: 6vh;
-	left: 6vh;
-	width: 30vw;
+
+/* Chat container styles */
+#chatContainer {
+  position: fixed;
+  bottom: var(--container-spacing);
+  left: var(--container-spacing);
+  width: 30vw;
 }
+
 #chat {
-	display: flex;
-	visibility: visible;
-	flex-flow: column;
-	justify-content: flex-end;
-	bottom: 6vh;
-	padding: 10px;
-	font: 13px Courier, sans-serif;
-	color: white;
-	border: 1px white solid;
-	margin-bottom: 5px;
+  display: flex;
+  visibility: visible;
+  flex-flow: column;
+  justify-content: flex-end;
+  bottom: var(--container-spacing);
+  padding: var(--standard-padding);
+  font: var(--main-font);
+  color: var(--main-text-color);
+  border: var(--border-style);
+  margin-bottom: var(--standard-margin);
 }
+
 .chatLine * {
-	word-break: break-word;
-	hyphens: auto;
-	width: inherit;
+  word-break: break-word;
+  hyphens: auto;
+  width: inherit;
 }
+
 .chatEntity {
-	width: inherit;
-	word-break: break-word;
-	hyphens: auto;
+  width: inherit;
+  word-break: break-word;
+  hyphens: auto;
 }
+
+/* Chat form styles */
 #chatForm {
-	display: flex;
-	flex-flow: column;
-	justify-content: space-around;
+  display: flex;
+  flex-flow: column;
+  justify-content: space-around;
 }
+
 #userChat {
-	display: flex;
-	flex-flow: row nowrap;
-	justify-content: space-between;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
 }
+
 #userChat > input[type=text] {
-	border: 1px solid white;
-	border-radius: 0px;
-	background-color: transparent;
-	color: white;
-	padding: 3px;
-	font: 13px Courier, sans-serif;
-	outline: none;
+  border: var(--border-style);
+  border-radius: 0px;
+  background-color: transparent;
+  color: var(--main-text-color);
+  padding: 3px;
+  font: var(--main-font);
+  outline: none;
 }
+
 #username {
-	width: 7vw;
-	border: 1px white solid;
-	margin-right: 0px;
+  width: 7vw;
+  border: var(--border-style);
+  margin-right: 0px;
 }
+
 #userMessage {
-	width: 17.5vw;
+  width: 17.5vw;
 }
+
 #userChat > input[type=submit] {
-	width: 4vw;
-	border: 1px white solid;
-	color: white;
-	font-size: 11px;
-	background-color: transparent;
+  width: 4vw;
+  border: var(--border-style);
+  color: var(--main-text-color);
+  font-size: 11px;
+  background-color: transparent;
 }
+
 #userChat > input[type=submit]:hover {
-	background-color: transparent;
-	color: red;
-	cursor: crosshair !important;
+  background-color: transparent;
+  color: var(--accent-color);
+  cursor: crosshair !important;
 }
+
+/* Info panel styles */
 #info {
-	display: flex;
-	display: none;
-	flex-flow: column;
-	position: fixed;
-	top: 6vh;
-	left: 6vh;
-	width: 45vw;
+  display: flex;
+  display: none;
+  flex-flow: column;
+  position: fixed;
+  top: var(--container-spacing);
+  left: var(--container-spacing);
+  width: 45vw;
 }
+
 #infoMessage {
-	color: #FFFFFF;
-	font: 13px Courier, sans-serif;
-	padding: 10px 10px 10px 10px;
-	text-align: left;
-	border: 1px white solid;
-	margin-bottom: 5px;
+  color: var(--main-text-color);
+  font: var(--main-font);
+  padding: var(--standard-padding);
+  text-align: left;
+  border: var(--border-style);
+  margin-bottom: var(--standard-margin);
 }
+
 #emailForm {
-	display: flex;
-	flex-flow: row wrap;
-	justify-content: space-between;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
 }
+
+/* Console styles */
 #console {
-	visibility: visible;
-	position: fixed;
-	display: flex;
-	flex-flow: row nowrap;
-	top: 5px;
-	left: 6px;
-	color: #FFFFFF;
-	font: 13px Courier, sans-serif;
-	cursor: help;
+  visibility: visible;
+  position: fixed;
+  display: flex;
+  flex-flow: row nowrap;
+  top: 5px;
+  left: 6px;
+  color: var(--main-text-color);
+  font: var(--main-font);
+  cursor: help;
 }
 
 #console * {
-	padding: 0 5px 0 5px;
-}
-
-#login {
+  padding: 0 5px 0 5px;
 }
 
 #back {
-	position: fixed;
-	display: none;
-	top: 5px;
-	left: 6px;
-	color: #FFFFFF;
-	font: 13px Courier, sans-serif;
-	cursor: help;
+  position: fixed;
+  display: none;
+  top: 5px;
+  left: 6px;
+  color: var(--main-text-color);
+  font: var(--main-font);
+  cursor: help;
 }
+
+/* Email form styles */
 #emailForm > input[type=text] {
-	border: 1px solid white;
-	border-radius: 0px;
-	background-color: transparent;
-	color: white;
-	padding: 3px;
-	font: 13px Courier, sans-serif;
-	outline: none;
+  border: var(--border-style);
+  border-radius: 0px;
+  background-color: transparent;
+  color: var(--main-text-color);
+  padding: 3px;
+  font: var(--main-font);
+  outline: none;
 }
+
 #emailInput {
-	width: 33vw;
-	border: 1px white solid;
-	margin-right: 0px;
+  width: 33vw;
+  border: var(--border-style);
+  margin-right: 0px;
 }
+
 #emailForm > input[type=submit] {
-	width: 9vw;
-	border: 1px white solid;
-	color: white;
-	background-color: transparent;
+  width: 9vw;
+  border: var(--border-style);
+  color: var(--main-text-color);
+  background-color: transparent;
 }
+
 #emailForm > input[type=submit]:hover {
-	background-color: transparent;
-	color: red;
-	cursor: crosshair !important;
+  background-color: transparent;
+  color: var(--accent-color);
+  cursor: crosshair !important;
 }
+
+/* UI controls */
 #hide {
-	position: fixed;
-	top: 5px;
-	right: 6px;
-	color: #FFFFFF;
-	font: 13px Courier, sans-serif;
-	text-align: center;
-	cursor: help;
+  position: fixed;
+  top: 5px;
+  right: 6px;
+  color: var(--main-text-color);
+  font: var(--main-font);
+  text-align: center;
+  cursor: help;
 }
+
 #show {
-	position: fixed;
-	display: none;
-	top: 5px;
-	right: 6px;
-	color: #FFFFFF;
-	font: 13px Courier, sans-serif;
-	text-align: left;
-	cursor: help;
+  position: fixed;
+  display: none;
+  top: 5px;
+  right: 6px;
+  color: var(--main-text-color);
+  font: var(--main-font);
+  text-align: left;
+  cursor: help;
 }
 
 #showMarket {
-	display: none;
+  display: none;
 }
 
-/*************************Mobile**************************/
+/*************************Mobile Styles**************************/
 
 @media screen and (max-width: 800px) {
-	body {
-		overflow: hidden;
-	}
+  body {
+    overflow: hidden;
+  }
 
-	#mapvis {
-		bottom: 0;
-		position: absolute;
-	}
+  #mapvis {
+    bottom: 0;
+    position: absolute;
+  }
 
-	#mapvis > .mapboxgl-map {
-		width: 100%;
-		height: 100%;
-		bottom: 0;
-		position: absolute;
-			}
+  #mapvis > .mapboxgl-map {
+    width: 100%;
+    height: 100%;
+    bottom: 0;
+    position: absolute;
+  }
 
-	#interface {
-		flex-flow: column;
-		justify-content: center;
-	}
-	#chatContainer{
-		position: fixed;
-		left: 8vw;
-		right: 8vw;
-		max-height: 90vh;
-		bottom: 6vh;
-		width: 84vw;
-	}
-	#chat {
-		display: flex;
-		position: absolute;
-		visibility: hidden;
-		flex-flow: column;
-		justify-content: flex-end;
-		bottom: 6vh;
-		padding: 5px;
-		max-height: 70vh;
-		font: 13px Courier, sans-serif;
-		color: white;
-		border: none;
-		margin-bottom: 5px;
-		overflow: hidden;
-		border: 1px white solid;
-	}
+  #interface {
+    flex-flow: column;
+    justify-content: center;
+  }
+  
+  /* Mobile chat styles */
+  #chatContainer {
+    position: fixed;
+    left: var(--mobile-container-spacing);
+    right: var(--mobile-container-spacing);
+    max-height: 90vh;
+    bottom: var(--container-spacing);
+    width: 84vw;
+  }
+  
+  #chat {
+    display: flex;
+    position: absolute;
+    visibility: hidden;
+    flex-flow: column;
+    justify-content: flex-end;
+    bottom: var(--container-spacing);
+    padding: 5px;
+    max-height: 70vh;
+    font: var(--main-font);
+    color: var(--main-text-color);
+    border: none;
+    margin-bottom: var(--standard-margin);
+    overflow: hidden;
+    border: var(--border-style);
+  }
 
-	#userChat > input[type=text] {
-		border: 1px solid white;
-		border-radius: 0px;
-		background-color: transparent;
-		color: white;
-		padding: 3px;
-		font: 13px Courier, sans-serif;
-		outline: none;
-	}
-	#username {
-		width: 20vw;
-		border: 1px white solid;
+  /* Mobile input styles */
+  #userChat > input[type=text] {
+    border: var(--border-style);
+    border-radius: 0px;
+    background-color: transparent;
+    color: var(--main-text-color);
+    padding: 3px;
+    font: var(--main-font);
+    outline: none;
+  }
+  
+  #username {
+    width: 20vw;
+    border: var(--border-style);
+  }
+  
+  #userMessage {
+    width: 42vw;
+  }
+  
+  #userChat > input[type=submit] {
+    width: 15vw;
+    border: var(--border-style);
+    color: var(--main-text-color);
+    background-color: transparent;
+  }
+  
+  /* Mobile info panel styles */
+  #info {
+    display: none;
+    flex-flow: column;
+    position: fixed;
+    left: var(--mobile-container-spacing);
+    right: var(--mobile-container-spacing);
+    width: 84vw;
+  }
+  
+  #infoMessage {
+    color: var(--main-text-color);
+    font: var(--main-font);
+    padding: var(--standard-padding);
+    text-align: left;
+    border: var(--border-style);
+    margin-bottom: var(--standard-margin);
+  }
+  
+  /* Mobile email form styles */
+  #emailForm {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+  }
+  
+  #emailForm > input[type=text] {
+    border: var(--border-style);
+    border-radius: 0px;
+    background-color: transparent;
+    color: var(--main-text-color);
+    padding: 3px;
+    font: var(--main-font);
+    outline: none;
+  }
+  
+  #emailInput {
+    width: 65vw;
+    border: var(--border-style);
+    margin-right: 0px;
+  }
+  
+  #emailForm > input[type=submit] {
+    width: 15vw;
+    border: var(--border-style);
+    color: var(--main-text-color);
+    background-color: transparent;
+  }
+  
+  #emailForm > input[type=submit]:hover {
+    background-color: transparent;
+    color: var(--accent-color);
+    cursor: crosshair !important;
+  }
+  
+  /* Mobile market styles */
+  #market {
+    position: fixed;
+    flex-flow: column;
+    right: var(--mobile-container-spacing);
+    left: var(--mobile-container-spacing);
+    color: var(--main-text-color);
+    font: var(--main-font);
+    width: 80vw;
+  }
+  
+  #buy, #price {
+    border: var(--border-style);
+    padding: 5px;
+    width: 80vw;
+  }
+  
+  #buy {
+    margin-bottom: var(--standard-margin);
+  }
+  
+  /* Mobile UI elements hiding */
+  #consoleData, #email, #userChat {
+    display: none;
+  }
 
-	}
-	#userMessage {
-		width: 42vw;
-	}
-	#userChat > input[type=submit] {
-		width: 15vw;
-		border: 1px white solid;
-		color: white;
-		background-color: transparent;
-	}
-	#info {
-		display: none;
-		flex-flow: column;
-		position: fixed;
-		left: 8vw;
-		right: 8vw;
-		width: 84vw;
-	}
-	#infoMessage {
-		color: #FFFFFF;
-		font: 13px Courier, sans-serif;
-		padding: 10px 10px 10px 10px;
-		text-align: left;
-		border: 1px white solid;
-		margin-bottom: 5px;
-	}
-	#emailForm {
-		display: flex;
-		flex-flow: row nowrap;
-		justify-content: space-between;
-	}
-	#emailForm > input[type=text] {
-		border: 1px solid white;
-		border-radius: 0px;
-		background-color: transparent;
-		color: white;
-		padding: 3px;
-		font: 13px Courier, sans-serif;
-		outline: none;
-	}
-	#emailInput {
-		width: 65vw;
-		border: 1px white solid;
-		margin-right: 0px;
-	}
-	#emailForm > input[type=submit] {
-		width: 15vw;
-		border: 1px white solid;
-		color: white;
-		background-color: transparent;
-	}
-	#emailForm > input[type=submit]:hover {
-		background-color: transparent;
-		color: red;
-		cursor: crosshair !important;
-	}
-	#market {
-		position: fixed;
-		flex-flow: column;
-		right: 8vw;
-		left: 8vw;
-		color: white;
-		font: 13px Courier, sans-serif;
-		width: 80vw;
-	}
-	#buy, #price {
-		border: 1px white solid;
-		padding: 5px;
-		width: 80vw;
-	}
-	#buy {
-		margin-bottom: 5px;
-	}
-	#consoleData, #email, #userChat {
-		display: none;
-	}
-
-	#show, #hide {
-		font-size: 20px;
-	}
-
+  #show, #hide {
+    font-size: 20px;
+  }
 }
 
+/* Fix for font sizing in mobile browsers */
 @media screen and (-webkit-min-device-pixel-ratio:0) { 
-  select,
-  textarea,
-  input {
+  select, textarea, input {
     font-size: 13px;
   }
 }
 
 @media screen and (-webkit-min-device-pixel-ratio:0) { 
-  select:focus,
-  textarea:focus,
-  input:focus {
+  select:focus, textarea:focus, input:focus {
     font-size: 13px;
   }
 }
 
 @media screen and (device-aspect-ratio: 9/16) {
-    select, textarea, input[type="text"], input[type="password"],
-    input[type="datetime"], input[type="datetime-local"],
-    input[type="date"], input[type="month"], input[type="time"],
-    input[type="week"], input[type="number"], input[type="email"],
-    input[type="tel"], input[type="url"]{ font-size: 16px; }
+  select, textarea, input[type="text"], input[type="password"],
+  input[type="datetime"], input[type="datetime-local"],
+  input[type="date"], input[type="month"], input[type="time"],
+  input[type="week"], input[type="number"], input[type="email"],
+  input[type="tel"], input[type="url"] { 
+    font-size: 16px; 
+  }
 }
-
