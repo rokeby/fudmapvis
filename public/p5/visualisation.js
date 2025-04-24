@@ -1,4 +1,4 @@
-require('dotenv').config();
+// require('dotenv').config();
 
 const key = process.env.MAPKEY;
 const mappa = new Mappa('MapboxGL', key);
