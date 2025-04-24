@@ -1,5 +1,5 @@
 // const key = "pk.eyJ1Ijoicm9rZWJ5IiwiYSI6ImNrZWViMjYzdDBqcjUzMm1sZ2IzdmxvdXMifQ.ZQFCehPe0Z7IRpR3k6vlKQ"
-const key = process.env.MAPKEY;
+// const key = process.env.MAPKEY;
 const mappa = new Mappa('MapboxGL', key);
 let myMap;
 let canvas;
