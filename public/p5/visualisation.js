@@ -1,5 +1,9 @@
+console.log("Mapbox Key:", process.env.MAPKEY); // Check Vercel logs
+const key = process.env.MAPKEY || "fallback_key"; // Fallback for local dev
+
 // const key = "pk.eyJ1Ijoicm9rZWJ5IiwiYSI6ImNrZWViMjYzdDBqcjUzMm1sZ2IzdmxvdXMifQ.ZQFCehPe0Z7IRpR3k6vlKQ"
 // const key = process.env.MAPKEY;
+
 const mappa = new Mappa('MapboxGL', key);
 let myMap;
 let canvas;
@@ -30,8 +34,6 @@ let geojsonPoint = {
   }]
 };
 
-console.log("Mapbox Key:", process.env.MAPKEY); // Check Vercel logs
-const key = process.env.MAPKEY || "fallback_key"; // Fallback for local dev
 
 async function preload() {
   preJSON = await loadJSON('https://api.zhexi.info/fud/hurricane');
