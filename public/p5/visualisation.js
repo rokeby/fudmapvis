@@ -1,5 +1,4 @@
-// require('dotenv').config();
-
+// const key = "pk.eyJ1Ijoicm9rZWJ5IiwiYSI6ImNrZWViMjYzdDBqcjUzMm1sZ2IzdmxvdXMifQ.ZQFCehPe0Z7IRpR3k6vlKQ"
 const key = process.env.MAPKEY;
 const mappa = new Mappa('MapboxGL', key);
 let myMap;
@@ -31,12 +30,17 @@ let geojsonPoint = {
   }]
 };
 
-function preload() {
-  preJSON = loadJSON('https://api.zhexi.info/fud/hurricane');
+console.log("Mapbox Key:", process.env.MAPKEY); // Check Vercel logs
+const key = process.env.MAPKEY || "fallback_key"; // Fallback for local dev
+
+async function preload() {
+  preJSON = await loadJSON('https://api.zhexi.info/fud/hurricane');
+  setup(); // Call setup() only after data is loaded
 }
 
 function setup() {
-
+  
+  console.log(preJSON); // Safely accessible
   // must make this into a separate function but for now.. 
   var d = new Date(); // for now
   var hours = d.getHours(); // => 9
