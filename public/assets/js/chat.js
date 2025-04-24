@@ -8,7 +8,7 @@ var dict = {
 
 async function getChat () {
 
-	const response = await fetch('http://api.zhexi.info/fud/chat')
+	const response = await fetch('https://api.zhexi.info/fud/chat')
 	const chat = await response.json();
 	$("#chat").html('')
 	chat.forEach(msg => $("#chat").append(
@@ -21,7 +21,7 @@ async function getChat () {
 $('#userChat').submit(function(event) {
 	event.preventDefault();
 	$.ajax({
-		url: 'http://api.zhexi.info/fud/userchat',
+		url: 'https://api.zhexi.info/fud/userchat',
 		type: 'POST',
 		data: $(this).serialize(),
 		success: function(data) {
@@ -35,7 +35,7 @@ $('#userChat').submit(function(event) {
 $('#emailForm').submit(function(event) {
 	event.preventDefault();
 	$.ajax({
-		url: 'http://api.zhexi.info/fud/email',
+		url: 'https://api.zhexi.info/fud/email',
 		type: 'POST',
 		data: $(this).serialize(),
 		success: function(data) {
