@@ -2,11 +2,13 @@
 :root {
   --main-bg-color: black;
   --main-text-color: white;
+  --inactive-color: #777777;
   --accent-color: red;
   --border-style: 1px solid white;
   --main-font: 13px Courier, sans-serif;
   --standard-padding: 10px;
   --standard-margin: 5px;
+  --taskbar-height: 30px;
   --container-spacing: 6vh;
   --mobile-container-spacing: 8vw;
 }
@@ -15,6 +17,18 @@ body {
   padding: 0;
   margin: 0;
   background-color: var(--main-bg-color);
+  overflow: hidden;
+}
+
+/* Make sure the visualization is always fullscreen */
+.main {
+  width: 100vw;
+  height: 100vh;
+  position: relative;
+}
+
+span {
+  line-height: 1.0;
 }
 
 /* Map related styles */
@@ -27,19 +41,15 @@ a.mapboxgl-ctrl-logo,
   display: none !important;
 }
 
-/* Main layout styles */
-.main {
+/* Map container styles - always full screen */
+#mapvis {
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 100vw;
   height: 100vh;
-}
-
-span {
-  line-height: 1.0;
-}
-
-/* Map container styles */
-#mapvis {
-  width: inherit;
+  z-index: 0;
+  display: block; /* Ensure always visible */
 }
 
 #mapvis > .mapboxgl-map {
@@ -47,16 +57,170 @@ span {
   height: 100%;
 }
 
+/* Fix canvas container in mapvis */
+#mapvis canvas {
+  display: block;
+}
+
+/* Taskbar styles */
+#console {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: var(--taskbar-height);
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  padding: 0 10px;
+/*  background-color: rgba(0, 0, 0, 0.5);*/
+  z-index: 10;
+  box-sizing: border-box;
+}
+
+#console button {
+  background-color: transparent;
+  border: none;
+  color: var(--main-text-color);
+  font: var(--main-font);
+  padding: 0 15px 0 0;
+  cursor: pointer;
+  height: 100%;
+  transition: color 0.3s ease;
+}
+
+#console button:hover {
+  color: var(--accent-color);
+}
+
+#console button.active {
+  color: var(--main-text-color);
+}
+
+#console button.inactive {
+  color: var(--inactive-color);
+}
+
+/* Hidden back button, shown when info is active */
+#back {
+  display: none;
+  position: fixed;
+  top: 7px;
+  left: 0;
+  height: var(--taskbar-height);
+  color: var(--main-text-color);
+  font: var(--main-font);
+/*  background-color: rgba(0, 0, 0, 0.5);*/
+  width: 100%;
+  z-index: 10;
+  padding: 0 10px;
+  display: none;
+  align-items: center;
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
+#back::-webkit-scrollbar {
+  display: none;
+}
+
+#back button {
+  background-color: transparent;
+  border: none;
+  color: var(--main-text-color);
+  font: var(--main-font);
+  cursor: pointer;
+}
+
+/* Hide/show toggle */
+#hide, #show {
+  position: fixed;
+  top: 0;
+  right: 15px;
+  color: var(--main-text-color);
+  font: var(--main-font);
+  text-align: center;
+  cursor: pointer;
+  z-index: 11;
+  height: var(--taskbar-height);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#show {
+  display: none;
+  top: 10px;
+}
+
+/* Info panel styles - centered */
+#info {
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 40%;
+  max-height: 80vh;
+  overflow-y: auto;
+  z-index: 5;
+}
+
+#infoMessage {
+  color: var(--main-text-color);
+  font: var(--main-font);
+  padding: var(--standard-padding);
+  text-align: left;
+/*  border: var(--border-style);*/
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+#emailForm {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+
+#emailForm > input[type=text] {
+  border: var(--border-style);
+  border-radius: 0;
+  background-color: transparent;
+  color: var(--main-text-color);
+  padding: 3px;
+  font: var(--main-font);
+  outline: none;
+  flex-grow: 1;
+  margin-right: 5px;
+}
+
+#emailForm > input[type=submit] {
+  border: var(--border-style);
+  color: var(--main-text-color);
+  background-color: transparent;
+  font: var(--main-font);
+  cursor: pointer;
+  padding: 3px 10px;
+}
+
+#emailForm > input[type=submit]:hover {
+  background-color: transparent;
+  color: var(--accent-color);
+  cursor: crosshair !important;
+}
+
 /* Market display styles */
 #market {
   position: fixed;
-  display: flex;
+  display: none;
   flex-flow: column;
   right: var(--container-spacing);
-  top: var(--container-spacing);
+  top: calc(var(--taskbar-height) + 10px);
   color: var(--main-text-color);
   font: var(--main-font);
   max-width: 30vw;
+  z-index: 5;
+  background-color: rgba(0, 0, 0, 0.8);
 }
 
 #buy, #price {
@@ -75,19 +239,26 @@ span {
   bottom: var(--container-spacing);
   left: var(--container-spacing);
   width: 30vw;
+  display: none;
+  z-index: 5;
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
 }
+
+
 
 #chat {
   display: flex;
-  visibility: visible;
   flex-flow: column;
   justify-content: flex-end;
-  bottom: var(--container-spacing);
   padding: var(--standard-padding);
   font: var(--main-font);
   color: var(--main-text-color);
   border: var(--border-style);
   margin-bottom: var(--standard-margin);
+  max-height: 30vh;
+  overflow-y: auto;
+  background-color: rgba(0, 0, 0, 0.8);
 }
 
 .chatLine * {
@@ -103,12 +274,6 @@ span {
 }
 
 /* Chat form styles */
-#chatForm {
-  display: flex;
-  flex-flow: column;
-  justify-content: space-around;
-}
-
 #userChat {
   display: flex;
   flex-flow: row nowrap;
@@ -117,7 +282,7 @@ span {
 
 #userChat > input[type=text] {
   border: var(--border-style);
-  border-radius: 0px;
+  border-radius: 0;
   background-color: transparent;
   color: var(--main-text-color);
   padding: 3px;
@@ -126,21 +291,23 @@ span {
 }
 
 #username {
-  width: 7vw;
+  width: 20%;
   border: var(--border-style);
-  margin-right: 0px;
+  margin-right: 5px;
 }
 
 #userMessage {
-  width: 17.5vw;
+  width: 60%;
+  margin-right: 5px;
 }
 
 #userChat > input[type=submit] {
-  width: 4vw;
+  width: 15%;
   border: var(--border-style);
   color: var(--main-text-color);
   font-size: 11px;
   background-color: transparent;
+  cursor: pointer;
 }
 
 #userChat > input[type=submit]:hover {
@@ -149,137 +316,44 @@ span {
   cursor: crosshair !important;
 }
 
-/* Info panel styles */
-#info {
-  display: flex;
-  display: none;
-  flex-flow: column;
-  position: fixed;
-  top: var(--container-spacing);
-  left: var(--container-spacing);
-  width: 45vw;
-}
-
-#infoMessage {
-  color: var(--main-text-color);
-  font: var(--main-font);
-  padding: var(--standard-padding);
-  text-align: left;
-  border: var(--border-style);
-  margin-bottom: var(--standard-margin);
-}
-
-#emailForm {
-  display: flex;
-  flex-flow: row wrap;
-  justify-content: space-between;
-}
-
-/* Console styles */
-#console {
-  visibility: visible;
-  position: fixed;
-  display: flex;
-  flex-flow: row nowrap;
-  top: 5px;
-  left: 6px;
-  color: var(--main-text-color);
-  font: var(--main-font);
-  cursor: help;
-}
-
-#console * {
-  padding: 0 5px 0 5px;
-}
-
-#back {
-  position: fixed;
-  display: none;
-  top: 5px;
-  left: 6px;
-  color: var(--main-text-color);
-  font: var(--main-font);
-  cursor: help;
-}
-
-/* Email form styles */
-#emailForm > input[type=text] {
-  border: var(--border-style);
-  border-radius: 0px;
-  background-color: transparent;
-  color: var(--main-text-color);
-  padding: 3px;
-  font: var(--main-font);
-  outline: none;
-}
-
-#emailInput {
-  width: 33vw;
-  border: var(--border-style);
-  margin-right: 0px;
-}
-
-#emailForm > input[type=submit] {
-  width: 9vw;
-  border: var(--border-style);
-  color: var(--main-text-color);
-  background-color: transparent;
-}
-
-#emailForm > input[type=submit]:hover {
-  background-color: transparent;
-  color: var(--accent-color);
-  cursor: crosshair !important;
-}
-
-/* UI controls */
-#hide {
-  position: fixed;
-  top: 5px;
-  right: 6px;
-  color: var(--main-text-color);
-  font: var(--main-font);
-  text-align: center;
-  cursor: help;
-}
-
-#show {
-  position: fixed;
-  display: none;
-  top: 5px;
-  right: 6px;
-  color: var(--main-text-color);
-  font: var(--main-font);
-  text-align: left;
-  cursor: help;
-}
-
-#showMarket {
-  display: none;
+/* Interface to contain all UI elements */
+#interface {
+  position: relative;
+  z-index: 5;
 }
 
 /*************************Mobile Styles**************************/
 
-@media screen and (max-width: 800px) {
-  body {
-    overflow: hidden;
+/* Tablet and smaller */
+@media screen and (max-width: 1024px) {
+  #info {
+    width: 60%;
   }
-
-  #mapvis {
-    bottom: 0;
-    position: absolute;
+  
+  #market {
+    max-width: 40vw;
   }
-
-  #mapvis > .mapboxgl-map {
-    width: 100%;
-    height: 100%;
-    bottom: 0;
-    position: absolute;
+  
+  #buy, #price {
+    width: 20vw;
   }
+  
+  #chatContainer {
+    width: 40vw;
+  }
+}
 
-  #interface {
-    flex-flow: column;
-    justify-content: center;
+/* Mobile landscape */
+@media screen and (max-width: 800px) and (orientation: landscape) {
+  #info {
+    width: 70%;
+  }
+}
+
+/* Mobile portrait */
+@media screen and (max-width: 600px) {
+  #info {
+    width: 80%;
   }
   
   /* Mobile chat styles */
@@ -287,108 +361,18 @@ span {
     position: fixed;
     left: var(--mobile-container-spacing);
     right: var(--mobile-container-spacing);
-    max-height: 90vh;
-    bottom: var(--container-spacing);
-    width: 84vw;
-  }
-  
-  #chat {
-    display: flex;
-    position: absolute;
-    visibility: hidden;
-    flex-flow: column;
-    justify-content: flex-end;
-    bottom: var(--container-spacing);
-    padding: 5px;
-    max-height: 70vh;
-    font: var(--main-font);
-    color: var(--main-text-color);
-    border: none;
-    margin-bottom: var(--standard-margin);
-    overflow: hidden;
-    border: var(--border-style);
+    bottom: var(--mobile-container-spacing);
+    width: calc(100% - 2 * var(--mobile-container-spacing));
+    -ms-overflow-style: none;  /* IE and Edge */
+  	scrollbar-width: none;  /* Firefox */
   }
 
-  /* Mobile input styles */
-  #userChat > input[type=text] {
-    border: var(--border-style);
-    border-radius: 0px;
-    background-color: transparent;
-    color: var(--main-text-color);
-    padding: 3px;
-    font: var(--main-font);
-    outline: none;
-  }
+  #chatContainer::-webkit-scrollbar {
+  display: none;
+}
   
-  #username {
-    width: 20vw;
-    border: var(--border-style);
-  }
-  
-  #userMessage {
-    width: 42vw;
-  }
-  
-  #userChat > input[type=submit] {
-    width: 15vw;
-    border: var(--border-style);
-    color: var(--main-text-color);
-    background-color: transparent;
-  }
-  
-  /* Mobile info panel styles */
-  #info {
-    display: none;
-    flex-flow: column;
-    position: fixed;
-    left: var(--mobile-container-spacing);
-    right: var(--mobile-container-spacing);
-    width: 84vw;
-  }
-  
-  #infoMessage {
-    color: var(--main-text-color);
-    font: var(--main-font);
-    padding: var(--standard-padding);
-    text-align: left;
-    border: var(--border-style);
-    margin-bottom: var(--standard-margin);
-  }
-  
-  /* Mobile email form styles */
-  #emailForm {
-    display: flex;
-    flex-flow: row nowrap;
-    justify-content: space-between;
-  }
-  
-  #emailForm > input[type=text] {
-    border: var(--border-style);
-    border-radius: 0px;
-    background-color: transparent;
-    color: var(--main-text-color);
-    padding: 3px;
-    font: var(--main-font);
-    outline: none;
-  }
-  
-  #emailInput {
-    width: 65vw;
-    border: var(--border-style);
-    margin-right: 0px;
-  }
-  
-  #emailForm > input[type=submit] {
-    width: 15vw;
-    border: var(--border-style);
-    color: var(--main-text-color);
-    background-color: transparent;
-  }
-  
-  #emailForm > input[type=submit]:hover {
-    background-color: transparent;
-    color: var(--accent-color);
-    cursor: crosshair !important;
+  #chat {
+    max-height: 25vh;
   }
   
   /* Mobile market styles */
@@ -397,28 +381,26 @@ span {
     flex-flow: column;
     right: var(--mobile-container-spacing);
     left: var(--mobile-container-spacing);
-    color: var(--main-text-color);
-    font: var(--main-font);
-    width: 80vw;
+    top: calc(var(--taskbar-height) + 10px);
+    max-width: none;
+    width: calc(100% - 2 * var(--mobile-container-spacing));
   }
   
   #buy, #price {
-    border: var(--border-style);
-    padding: 5px;
-    width: 80vw;
+    width: auto;
   }
   
-  #buy {
-    margin-bottom: var(--standard-margin);
+  /* Adjust username and message fields for mobile */
+  #username {
+    width: 25%;
   }
   
-  /* Mobile UI elements hiding */
-  #consoleData, #email, #userChat {
-    display: none;
+  #userMessage {
+    width: 55%;
   }
-
-  #show, #hide {
-    font-size: 20px;
+  
+  #userChat > input[type=submit] {
+    width: 15%;
   }
 }
 

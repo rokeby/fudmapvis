@@ -35,6 +35,7 @@ async function preload() {
   try {
     const response = await loadJSON(VIS_CONFIG.apiEndpoint);
     currentData = response;
+    // console.log(currentData)
     setup();
   } catch (error) {
     console.error("Error loading hurricane data:", error);
