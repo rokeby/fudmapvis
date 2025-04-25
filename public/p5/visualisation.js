@@ -23,9 +23,9 @@ let pitch = 50;
 
 // Map styles for different times of day
 let mapStyles = {
-  "dawn" : "mapbox://styles/rokeby/ckk1t6qc01c5i17mzvcxt6wvy",
+  "dawn" : "mapbox://styles/rokeby/ckgbku2r52ar219qukmelh6dr",
   "day" : "mapbox://styles/rokeby/ckgbl5cah1wkv19o2asy4tjb1",
-  "dusk" : "mapbox://styles/rokeby/ckfvgjjsy6vkw19mkij8g9v3c",
+  "dusk" : "mapbox://styles/rokeby/ckgbjx2nd0qpj19k5b6tgl69l",
   "night" : "mapbox://styles/rokeby/ckfvgjjsy6vkw19mkij8g9v3c",
 }
 
